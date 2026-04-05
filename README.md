@@ -837,3 +837,7 @@ If you use this project in research, please cite:
 
 **Last Updated**: 5 April 2026  
 **Version**: 0.2.0
+
+cd "/Users/chaman/Desktop/HP challenge"
+source .venv/bin/activate
+python scripts/run_server.py
