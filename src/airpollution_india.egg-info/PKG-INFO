@@ -1,0 +1,54 @@
+Metadata-Version: 2.4
+Name: airpollution-india
+Version: 0.1.0
+Summary: Satellite + AI/ML pipeline for PM estimation
+Author: HP Challenge Team
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.25
+Requires-Dist: pandas>=2.0
+Requires-Dist: scikit-learn>=1.3
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: joblib>=1.3
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4; extra == "dev"
+Requires-Dist: ruff>=0.5; extra == "dev"
+Requires-Dist: mypy>=1.8; extra == "dev"
+
+# Air Pollution Monitoring from Space (India)
+
+Structured AI/ML pipeline to estimate surface PM2.5 and PM10 by combining satellite AOD, ground observations, and meteorological reanalysis.
+
+## Project Structure
+
+- `src/airpollution/`: source package
+- `configs/`: YAML configuration
+- `scripts/`: runnable entry scripts
+- `tests/`: unit and integration tests
+- `data/`: local data workspace (ignored)
+- `artifacts/`: trained models and outputs (ignored)
+
+## Quick Start
+
+1. Create and activate a Python environment.
+2. Install dependencies:
+   ```bash
+   pip install -e .[dev]
+   ```
+3. Run training pipeline:
+   ```bash
+   python scripts/train_and_evaluate.py --config configs/base.yaml
+   ```
+4. Run tests:
+   ```bash
+   pytest
+   ```
+
+## Current Scope (Phase 1)
+
+- Robust tabular ML baseline (`RandomForestRegressor`)
+- Deterministic train/test split
+- Strong input validation and logging
+- Metrics: RMSE, MAE, R²
+
+Later phases will add INSAT/MERRA/CPCB specific ingestion connectors and geospatial map generation.

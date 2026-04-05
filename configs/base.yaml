@@ -1,0 +1,36 @@
+project:
+  name: airpollution-india
+  random_seed: 42
+
+paths:
+  input_csv: data/processed/unified_dataset.csv
+  output_dir: artifacts/baseline
+  model_path: artifacts/baseline/random_forest_pm25.joblib
+  metrics_path: artifacts/baseline/metrics.json
+
+model:
+  target_column: pm25
+  feature_columns:
+    - aod
+    - temperature
+    - humidity
+    - wind_speed
+    - boundary_layer_height
+    - lat
+    - lon
+    - day_of_year
+  algorithm: random_forest
+  random_forest:
+    n_estimators: 300
+    max_depth: 16
+    min_samples_split: 4
+    min_samples_leaf: 2
+    n_jobs: -1
+
+training:
+  test_size: 0.2
+  shuffle: true
+
+quality:
+  drop_missing_target: true
+  max_missing_feature_fraction: 0.4
