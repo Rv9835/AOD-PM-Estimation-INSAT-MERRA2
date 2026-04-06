@@ -57,7 +57,8 @@ if MODEL_PATH is not None:
 def predict_pm(feature_list):
     """Predict using the locally loaded model. feature_list must be list-like."""
     if _model is None:
-        raise FileNotFoundError("Model not found. Expected one of: " + ", ".join(MODEL_CANDIDATES))
+        model_paths = ", ".join(str(p) for p in MODEL_CANDIDATES)
+        raise FileNotFoundError("Model not found. Expected one of: " + model_paths)
     arr = np.array(feature_list).reshape(1, -1)
     return float(_model.predict(arr)[0])
 
@@ -287,7 +288,8 @@ with tab1:
                 })
             except FileNotFoundError as e:
                 st.error("❌ Model file not found: " + str(e))
-                st.warning("Place a trained model at one of: " + ", ".join(MODEL_CANDIDATES))
+                model_paths = ", ".join(str(p) for p in MODEL_CANDIDATES)
+                st.warning("Place a trained model at one of: " + model_paths)
             except Exception as e:
                 st.error(f"❌ Error: {str(e)}")
 
