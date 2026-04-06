@@ -1,9 +1,10 @@
 import streamlit as st
-import requests
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 import json
+import joblib
+import os
 
 # Page configuration
 st.set_page_config(
@@ -29,8 +30,32 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# API configuration
-API_BASE_URL = "http://localhost:8000"
+# Local model configuration — prefer trained Greater Noida model, then baseline, then model.pkl
+MODEL_CANDIDATES = [
+    "artifacts/greater_noida/random_forest_pm25.joblib",
+    "artifacts/baseline/random_forest_pm25.joblib",
+    "model.pkl",
+]
+
+MODEL_PATH = None
+for _p in MODEL_CANDIDATES:
+    if os.path.exists(_p):
+        MODEL_PATH = _p
+        break
+
+_model = None
+if MODEL_PATH is not None:
+    try:
+        _model = joblib.load(MODEL_PATH)
+    except Exception:
+        _model = None
+
+def predict_pm(feature_list):
+    """Predict using the locally loaded model. feature_list must be list-like."""
+    if _model is None:
+        raise FileNotFoundError("Model not found. Expected one of: " + ", ".join(MODEL_CANDIDATES))
+    arr = np.array(feature_list).reshape(1, -1)
+    return float(_model.predict(arr)[0])
 
 # Title and description
 st.title("🌍 Air Quality Prediction System")
@@ -155,128 +180,110 @@ with tab1:
     
     # Make prediction
     if predict_btn:
-        with st.spinner("📡 Fetching prediction from API..."):
+        with st.spinner("🔮 Predicting using local model..."):
             try:
-                # Prepare request payload
-                payload = {
-                    "aod": [aod],
-                    "temperature": [temperature],
-                    "humidity": [humidity],
-                    "wind_speed": [wind_speed],
-                    "boundary_layer_height": [boundary_layer_height],
-                    "lat": [latitude],
-                    "lon": [longitude],
-                    "day_of_year": [day_of_year]
-                }
-                
-                # Call API
-                response = requests.post(
-                    f"{API_BASE_URL}/predict",
-                    json=payload,
-                    timeout=10
-                )
-                
-                if response.status_code == 200:
-                    result = response.json()
-                    pm25_value = result['predictions'][0]
-                    
-                    # Determine air quality category
-                    if pm25_value <= 12:
-                        category = "🟢 GOOD"
-                        color = "good"
-                        aqi = int(pm25_value / 12 * 50)
-                        advice = "Air quality is satisfactory. Enjoy your outdoor activities!"
-                    elif pm25_value <= 35:
-                        category = "🟡 MODERATE"
-                        color = "moderate"
-                        aqi = int(50 + (pm25_value - 12) / 23 * 50)
-                        advice = "Sensitive individuals should reduce prolonged outdoor exertion."
-                    elif pm25_value <= 55:
-                        category = "🟠 UNHEALTHY FOR SENSITIVE GROUPS"
-                        color = "unhealthy"
-                        aqi = int(100 + (pm25_value - 35) / 20 * 50)
-                        advice = "Members of sensitive groups should avoid outdoor activities."
-                    elif pm25_value <= 150:
-                        category = "🔴 UNHEALTHY"
-                        color = "very_unhealthy"
-                        aqi = int(150 + (pm25_value - 55) / 95 * 50)
-                        advice = "Everyone should avoid outdoor activities."
-                    else:
-                        category = "🟣 HAZARDOUS"
-                        color = "hazardous"
-                        aqi = 500
-                        advice = "Everyone should avoid ALL outdoor exertion."
-                    
-                    # Display results
-                    st.success("✅ Prediction successful!")
-                    
-                    # Results card
-                    result_col1, result_col2, result_col3 = st.columns(3)
-                    
-                    with result_col1:
-                        st.metric(
-                            "PM2.5 Level",
-                            f"{pm25_value:.2f} µg/m³",
-                            delta=f"{pm25_value - 25:.2f} (vs avg 25)"
-                        )
-                    
-                    with result_col2:
-                        st.metric(
-                            "Air Quality Index",
-                            aqi,
-                            delta="EPA Scale 0-500"
-                        )
-                    
-                    with result_col3:
-                        st.markdown(f"<div class='{color}'>{category}</div>", unsafe_allow_html=True)
-                    
-                    st.divider()
-                    
-                    # Advice box
-                    st.info(f"💡 **Recommendation**: {advice}")
-                    
-                    # Input parameters summary
-                    with st.expander("📋 Input Parameters"):
-                        params_df = pd.DataFrame({
-                            "Parameter": ["AOD", "Temperature", "Humidity", "Wind Speed", "Boundary Layer Height", "Latitude", "Longitude", "Day of Year"],
-                            "Value": [f"{aod:.2f}", f"{temperature:.1f}K", f"{humidity}%", f"{wind_speed:.1f}m/s", f"{boundary_layer_height:.0f}m", f"{latitude:.2f}°", f"{longitude:.2f}°", f"{day_of_year}"],
-                            "Relevance to PM2.5": [
-                                "Higher AOD = more aerosols in air",
-                                "Affects pollutant behavior & mixing",
-                                "High humidity can increase PM2.5",
-                                "Higher wind disperses pollutants",
-                                "Higher BLH better disperses pollutants",
-                                "Geographic location affects patterns",
-                                "Geographic location affects patterns",
-                                "Seasonal variation in emissions"
-                            ]
-                        })
-                        st.dataframe(params_df, use_container_width=True, hide_index=True)
-                    
-                    # Store in history
-                    st.session_state.prediction_history.append({
-                        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                        "location": location_name,
-                        "pm25": pm25_value,
-                        "aqi": aqi,
-                        "category": category,
-                        "aod": aod,
-                        "temperature": temperature,
-                        "humidity": humidity,
-                        "wind_speed": wind_speed
-                    })
+                # Build feature vector in same order used by training
+                feature_vector = [
+                    aod,
+                    temperature,
+                    humidity,
+                    wind_speed,
+                    boundary_layer_height,
+                    latitude,
+                    longitude,
+                    day_of_year,
+                ]
+
+                pm25_value = predict_pm(feature_vector)
+
+                # Determine air quality category
+                if pm25_value <= 12:
+                    category = "🟢 GOOD"
+                    color = "good"
+                    aqi = int(pm25_value / 12 * 50)
+                    advice = "Air quality is satisfactory. Enjoy your outdoor activities!"
+                elif pm25_value <= 35:
+                    category = "🟡 MODERATE"
+                    color = "moderate"
+                    aqi = int(50 + (pm25_value - 12) / 23 * 50)
+                    advice = "Sensitive individuals should reduce prolonged outdoor exertion."
+                elif pm25_value <= 55:
+                    category = "🟠 UNHEALTHY FOR SENSITIVE GROUPS"
+                    color = "unhealthy"
+                    aqi = int(100 + (pm25_value - 35) / 20 * 50)
+                    advice = "Members of sensitive groups should avoid outdoor activities."
+                elif pm25_value <= 150:
+                    category = "🔴 UNHEALTHY"
+                    color = "very_unhealthy"
+                    aqi = int(150 + (pm25_value - 55) / 95 * 50)
+                    advice = "Everyone should avoid outdoor activities."
                 else:
-                    st.error(f"❌ API Error: {response.status_code}")
-                    st.error(f"Response: {response.text}")
-            
-            except requests.exceptions.ConnectionError:
-                st.error("❌ **Cannot connect to API server!**")
-                st.warning("Make sure the FastAPI server is running:")
-                st.code("""
-cd "/Users/chaman/Desktop/HP challenge"
-source .venv/bin/activate
-python scripts/run_server.py
-                """)
+                    category = "🟣 HAZARDOUS"
+                    color = "hazardous"
+                    aqi = 500
+                    advice = "Everyone should avoid ALL outdoor exertion."
+
+                # Display results
+                st.success("✅ Prediction successful!")
+
+                # Results card
+                result_col1, result_col2, result_col3 = st.columns(3)
+
+                with result_col1:
+                    st.metric(
+                        "PM2.5 Level",
+                        f"{pm25_value:.2f} µg/m³",
+                        delta=f"{pm25_value - 25:.2f} (vs avg 25)"
+                    )
+
+                with result_col2:
+                    st.metric(
+                        "Air Quality Index",
+                        aqi,
+                        delta="EPA Scale 0-500"
+                    )
+
+                with result_col3:
+                    st.markdown(f"<div class='{color}'>{category}</div>", unsafe_allow_html=True)
+
+                st.divider()
+
+                # Advice box
+                st.info(f"💡 **Recommendation**: {advice}")
+
+                # Input parameters summary
+                with st.expander("📋 Input Parameters"):
+                    params_df = pd.DataFrame({
+                        "Parameter": ["AOD", "Temperature", "Humidity", "Wind Speed", "Boundary Layer Height", "Latitude", "Longitude", "Day of Year"],
+                        "Value": [f"{aod:.2f}", f"{temperature:.1f}K", f"{humidity}%", f"{wind_speed:.1f}m/s", f"{boundary_layer_height:.0f}m", f"{latitude:.2f}°", f"{longitude:.2f}°", f"{day_of_year}"],
+                        "Relevance to PM2.5": [
+                            "Higher AOD = more aerosols in air",
+                            "Affects pollutant behavior & mixing",
+                            "High humidity can increase PM2.5",
+                            "Higher wind disperses pollutants",
+                            "Higher BLH better disperses pollutants",
+                            "Geographic location affects patterns",
+                            "Geographic location affects patterns",
+                            "Seasonal variation in emissions"
+                        ]
+                    })
+                    st.dataframe(params_df, use_container_width=True, hide_index=True)
+
+                # Store in history
+                st.session_state.prediction_history.append({
+                    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "location": location_name,
+                    "pm25": pm25_value,
+                    "aqi": aqi,
+                    "category": category,
+                    "aod": aod,
+                    "temperature": temperature,
+                    "humidity": humidity,
+                    "wind_speed": wind_speed
+                })
+            except FileNotFoundError as e:
+                st.error("❌ Model file not found: " + str(e))
+                st.warning("Place a trained model at one of: " + ", ".join(MODEL_CANDIDATES))
             except Exception as e:
                 st.error(f"❌ Error: {str(e)}")
 
@@ -285,35 +292,45 @@ with tab2:
     
     try:
         with st.spinner("📊 Loading model metrics..."):
-            metrics_response = requests.get(f"{API_BASE_URL}/metrics", timeout=10)
-            
-            if metrics_response.status_code == 200:
-                metrics = metrics_response.json()
-                
+            # Try to load metrics from local artifacts (prefer Greater Noida then baseline)
+            METRICS_CANDIDATES = [
+                "artifacts/greater_noida/metrics.json",
+                "artifacts/baseline/metrics.json",
+            ]
+            metrics = None
+            for _m in METRICS_CANDIDATES:
+                if os.path.exists(_m):
+                    with open(_m, "r", encoding="utf-8") as fh:
+                        metrics = json.load(fh)
+                    break
+
+            if metrics is None:
+                st.warning("Model metrics not found. Train the model or provide a metrics.json in artifacts.")
+            else:
                 # Display metrics in cards
                 m_col1, m_col2, m_col3 = st.columns(3)
-                
+
                 with m_col1:
                     st.metric(
                         "RMSE (Root Mean Squared Error)",
                         f"{metrics['rmse']:.2f} µg/m³",
                         help="Average prediction error magnitude"
                     )
-                
+
                 with m_col2:
                     st.metric(
                         "MAE (Mean Absolute Error)",
                         f"{metrics['mae']:.2f} µg/m³",
                         help="Average absolute prediction error"
                     )
-                
+
                 with m_col3:
                     st.metric(
                         "R² (Coefficient of Determination)",
                         f"{metrics['r2']:.4f}",
                         help="Proportion of variance explained (0-1)"
                     )
-                
+
                 st.divider()
                 
                 # Interpretation
@@ -357,12 +374,9 @@ with tab2:
                 - **Day of Year**: Seasonal emissions and meteorological patterns
                 """)
             
-            else:
-                st.error(f"Cannot fetch metrics: {metrics_response.status_code}")
-    
     except Exception as e:
         st.error(f"Error loading metrics: {str(e)}")
-        st.warning("Make sure the API server is running")
+        st.warning("Provide metrics.json in artifacts or train the model to generate metrics.")
 
 with tab3:
     st.header("Prediction History")
