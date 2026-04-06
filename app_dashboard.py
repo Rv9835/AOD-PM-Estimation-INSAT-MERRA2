@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 import json
 import joblib
 import os
+from pathlib import Path
 
 # Page configuration
 st.set_page_config(
@@ -31,16 +32,19 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # Local model configuration — prefer trained Greater Noida model, then baseline, then model.pkl
+
+# Resolve model paths relative to the repository root (this file's parent)
+PROJECT_ROOT = Path(__file__).resolve().parent
 MODEL_CANDIDATES = [
-    "artifacts/greater_noida/random_forest_pm25.joblib",
-    "artifacts/baseline/random_forest_pm25.joblib",
-    "model.pkl",
+    PROJECT_ROOT / "artifacts" / "greater_noida" / "random_forest_pm25.joblib",
+    PROJECT_ROOT / "artifacts" / "baseline" / "random_forest_pm25.joblib",
+    PROJECT_ROOT / "model.pkl",
 ]
 
 MODEL_PATH = None
 for _p in MODEL_CANDIDATES:
-    if os.path.exists(_p):
-        MODEL_PATH = _p
+    if Path(_p).exists():
+        MODEL_PATH = str(_p)
         break
 
 _model = None
