@@ -10,6 +10,19 @@ This project combines real-world data from three sources (CPCB ground stations, 
 
 ---
 
+## 🚀 Live Demo
+
+**Try the interactive predictor now:** **[📊 Air Quality Prediction System](https://aod-pm-estimation-insat-merra2.streamlit.app/)**
+
+No installation needed! The Streamlit Cloud app provides an intuitive interface to:
+- 🌍 Enter satellite AOD, meteorological data, and location (latitude/longitude)
+- 🔮 Get instant PM2.5 predictions from the trained Random Forest model
+- 📈 View detailed model performance metrics (RMSE, MAE, R²)
+- 📋 Track prediction history and trends
+- ✅ All powered by the trained models in `artifacts/`
+
+---
+
 ## Table of Contents
 
 - [Features](#features)
@@ -66,25 +79,35 @@ This project combines real-world data from three sources (CPCB ground stations, 
 
 ## Quick Start
 
-### 1. Clone & Change Directory
+### Easiest: Use the Hosted Web App (No Installation!)
+```
+1. Open: https://aod-pm-estimation-insat-merra2.streamlit.app/
+2. Enter satellite/weather data
+3. Click "Predict PM2.5"
+Done! 🎉
+```
+
+### Alternative: Run Locally
+
+#### 1. Clone & Change Directory
 ```bash
 git clone https://github.com/Rv9835/AOD-PM-Estimation-INSAT-MERRA2.git
 cd AOD-PM-Estimation-INSAT-MERRA2
 ```
 
-### 2. Create Virtual Environment
+#### 2. Create Virtual Environment
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate      # On Windows: .venv\Scripts\activate
 ```
 
-### 3. Install Package & Dependencies
+#### 3. Install Package & Dependencies
 ```bash
 pip install -e .[dev]
 ```
 This installs the project in editable mode with all development tools (pytest, ruff, mypy).
 
-### 4. Run Baseline Training
+#### 4. Run Baseline Training
 ```bash
 python scripts/train_and_evaluate.py --config configs/base.yaml
 ```
@@ -97,7 +120,13 @@ INFO | Train shape: (16, 8), Test shape: (4, 8)
 INFO | Training completed. Metrics: {'rmse': 7.91, 'mae': 6.35, 'r2': 0.70}
 ```
 
-### 5. Start the Web Server
+#### 5. Run Streamlit Dashboard Locally
+```bash
+streamlit run app_dashboard.py
+```
+A web interface opens at **http://localhost:8501** for interactive predictions.
+
+#### 6. (Optional) Start the REST API Server
 ```bash
 python scripts/run_server.py
 # or with custom port: python scripts/run_server.py 9000
@@ -105,7 +134,7 @@ python scripts/run_server.py
 
 Visit **http://localhost:8000/docs** for interactive API documentation.
 
-### 6. Test Everything
+#### 7. Test Everything
 ```bash
 pytest -v                       # Run all tests
 python scripts/client.py        # Run example client
