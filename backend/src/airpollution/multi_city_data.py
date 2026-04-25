@@ -4,6 +4,7 @@ Handles city-boundary-aware data filtering, scenario-based train/test splits, an
 """
 
 import logging
+import os
 from typing import Dict, List, Tuple, Optional
 from pathlib import Path
 
@@ -16,7 +17,71 @@ from airpollution.cities import CityManager, CityConfig
 
 logger = logging.getLogger(__name__)
 
-DATASET_URL = "https://YOUR_PUBLIC_DATASET_URL/unified_dataset.csv"
+
+# =====================================================
+# CONFIGURATION LOADER (DATASET URL)
+# =====================================================
+def _get_dataset_url() -> str:
+    """
+    Retrieve DATASET_URL from Streamlit Secrets (cloud) or environment variables (local dev).
+    
+    Priority order:
+    1. STREAMLIT_SECRETS (st.secrets) - Streamlit Cloud production
+    2. DATASET_URL env var - Local development (.env file or shell export)
+    
+    Returns:
+        str: Valid dataset URL
+        
+    Raises:
+        ValueError: If URL is missing or still set to placeholder value
+    """
+    # Try Streamlit Secrets first (works on Streamlit Cloud)
+    try:
+        import streamlit as st
+        if hasattr(st, "secrets") and "DATASET_URL" in st.secrets:
+            url = st.secrets["DATASET_URL"]
+            if url and not url.startswith("https://YOUR_PUBLIC"):
+                logger.debug("✓ Loaded DATASET_URL from Streamlit Secrets")
+                return url
+    except (ImportError, KeyError, AttributeError):
+        pass
+    
+    # Fall back to environment variable (local dev, CI/CD)
+    url = os.getenv("DATASET_URL", "").strip()
+    
+    if not url:
+        raise ValueError(
+            "❌ DATASET_URL not configured!\n\n"
+            "For Streamlit Cloud:\n"
+            "  1. Go to https://share.streamlit.io → Select your app → Settings\n"
+            "  2. Scroll to 'Secrets' section\n"
+            "  3. Paste this YAML:\n"
+            "     DATASET_URL: 'https://huggingface.co/datasets/<username>/<repo>/resolve/main/unified_dataset.csv?download=true'\n"
+            "  4. Click Save & Reboot app\n\n"
+            "For Local Development:\n"
+            "  • Create .env file in project root with: DATASET_URL=https://...\n"
+            "  • Or export DATASET_URL='https://...' in your shell\n"
+        )
+    
+    if url.startswith("https://YOUR_PUBLIC"):
+        raise ValueError(
+            "❌ DATASET_URL is still set to placeholder value!\n"
+            "Please update it to a real download URL in Streamlit Secrets or environment variables."
+        )
+    
+    logger.debug(f"✓ Loaded DATASET_URL from environment variable")
+    return url
+
+
+# Lazy-load DATASET_URL on first use (not at import time)
+_DATASET_URL_CACHE: Optional[str] = None
+
+def get_dataset_url() -> str:
+    """Get cached dataset URL, validating only when needed."""
+    global _DATASET_URL_CACHE
+    if _DATASET_URL_CACHE is None:
+        _DATASET_URL_CACHE = _get_dataset_url()
+    return _DATASET_URL_CACHE
 
 
 # =====================================================
@@ -157,15 +222,32 @@ class MultiCityDataLoader:
 
     @staticmethod
     def _download_dataset(target_path: Path) -> None:
-        """Download unified dataset to target path if missing locally."""
+        """
+        Download unified dataset to target path if missing locally.
+        
+        Validates DATASET_URL before attempting download and provides
+        clear error messages if configuration is missing/invalid.
+        """
         target_path.parent.mkdir(parents=True, exist_ok=True)
-
+        
         try:
-            response = requests.get(DATASET_URL, stream=True, timeout=120)
+            dataset_url = get_dataset_url()
+        except ValueError as e:
+            logger.error(str(e))
+            raise
+        
+        try:
+            logger.info(f"Downloading dataset from {dataset_url[:80]}...")
+            response = requests.get(dataset_url, stream=True, timeout=120)
             response.raise_for_status()
         except requests.RequestException as exc:
             raise FileNotFoundError(
-                f"Failed to download unified dataset from DATASET_URL: {exc}"
+                f"❌ Failed to download unified dataset from {dataset_url[:100]}...\n"
+                f"Error: {exc}\n\n"
+                f"Debug tips:\n"
+                f"  • Verify URL is correct and publicly accessible\n"
+                f"  • Test in browser: curl -I '{dataset_url}'\n"
+                f"  • Check Streamlit Secrets configuration\n"
             ) from exc
 
         with open(target_path, "wb") as dataset_file:

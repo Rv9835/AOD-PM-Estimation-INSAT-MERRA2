@@ -6,6 +6,16 @@ Non-conventional 3D Futuristic Design with Glassmorphism and Pydeck 3D Mapping
 import sys
 from pathlib import Path
 
+# Load .env file for local development (python-dotenv auto-discovery)
+try:
+    from dotenv import load_dotenv
+    PROJECT_ROOT_TEMP = Path(__file__).resolve().parent.parent
+    env_file = PROJECT_ROOT_TEMP / ".env"
+    if env_file.exists():
+        load_dotenv(env_file)
+except ImportError:
+    pass  # python-dotenv not required in production
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 BACKEND_PATH = str(PROJECT_ROOT / "backend")
 BACKEND_SRC_PATH = str(PROJECT_ROOT / "backend" / "src")
