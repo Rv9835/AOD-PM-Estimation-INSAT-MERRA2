@@ -9,11 +9,14 @@ from pathlib import Path
 
 import pandas as pd
 import numpy as np
+import requests
 import yaml
 
 from airpollution.cities import CityManager, CityConfig
 
 logger = logging.getLogger(__name__)
+
+DATASET_URL = "https://YOUR_PUBLIC_DATASET_URL/unified_dataset.csv"
 
 
 # =====================================================
@@ -110,6 +113,10 @@ class MultiCityDataLoader:
         if not self.csv_path.is_absolute():
             self.csv_path = (self.project_root / self.csv_path).resolve()
 
+        if not self.csv_path.exists():
+            logger.warning("Downloading dataset...")
+            self._download_dataset(self.csv_path)
+
         self.csv_path = self._resolve_unified_dataset_path(self.csv_path)
 
         # Initialize data cache
@@ -147,6 +154,26 @@ class MultiCityDataLoader:
             base_dir / f"{stem}.csv.gz",
             base_dir / f"{stem}.parquet",
         ]
+
+    @staticmethod
+    def _download_dataset(target_path: Path) -> None:
+        """Download unified dataset to target path if missing locally."""
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+
+        try:
+            response = requests.get(DATASET_URL, stream=True, timeout=120)
+            response.raise_for_status()
+        except requests.RequestException as exc:
+            raise FileNotFoundError(
+                f"Failed to download unified dataset from DATASET_URL: {exc}"
+            ) from exc
+
+        with open(target_path, "wb") as dataset_file:
+            for chunk in response.iter_content(chunk_size=1024 * 1024):
+                if chunk:
+                    dataset_file.write(chunk)
+
+        logger.info(f"✓ Downloaded unified dataset to {target_path}")
 
     def _resolve_unified_dataset_path(self, base_path: Path) -> Path:
         """Resolve unified dataset path with support for .csv.gz and .parquet fallbacks."""
