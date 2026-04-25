@@ -9,11 +9,14 @@ from pathlib import Path
 
 import pandas as pd
 import numpy as np
+import requests
 import yaml
 
 from airpollution.cities import CityManager, CityConfig
 
 logger = logging.getLogger(__name__)
+
+DATASET_URL = "https://YOUR_PUBLIC_DATASET_URL/unified_dataset.csv"
 
 
 # =====================================================
@@ -101,7 +104,7 @@ class MultiCityDataLoader:
         self.config = ConfigLoader.load_config(str(self.config_path))
         self.city_manager = CityManager()
 
-        # Determine CSV path
+        # Determine dataset path from config override
         if unified_csv_path:
             self.csv_path = Path(unified_csv_path)
         else:
@@ -111,7 +114,10 @@ class MultiCityDataLoader:
             self.csv_path = (self.project_root / self.csv_path).resolve()
 
         if not self.csv_path.exists():
-            raise FileNotFoundError(f"Unified dataset not found: {self.csv_path}")
+            logger.warning("Downloading dataset...")
+            self._download_dataset(self.csv_path)
+
+        self.csv_path = self._resolve_unified_dataset_path(self.csv_path)
 
         # Initialize data cache
         self._raw_data: Optional[DataFrame] = None
@@ -120,7 +126,85 @@ class MultiCityDataLoader:
         # Get required columns from config
         self.required_columns = self.config["data"]["validation"]["required_columns"]
 
-        logger.info(f"✓ Initialized MultiCityDataLoader with CSV: {self.csv_path}")
+        logger.info(f"✓ Initialized MultiCityDataLoader with dataset: {self.csv_path}")
+
+    @staticmethod
+    def _candidate_dataset_paths(base_path: Path) -> List[Path]:
+        """Return candidate dataset paths in priority order for Option A fallback."""
+        suffixes = {suffix.lower() for suffix in base_path.suffixes}
+        stem = base_path.stem if not suffixes else base_path.name.replace("".join(base_path.suffixes), "")
+        base_dir = base_path.parent
+
+        if suffixes == {".csv", ".gz"}:
+            return [
+                base_path,
+                base_dir / f"{stem}.csv",
+                base_dir / f"{stem}.parquet",
+            ]
+
+        if suffixes == {".parquet"}:
+            return [
+                base_path,
+                base_dir / f"{stem}.csv.gz",
+                base_dir / f"{stem}.csv",
+            ]
+
+        return [
+            base_path,
+            base_dir / f"{stem}.csv.gz",
+            base_dir / f"{stem}.parquet",
+        ]
+
+    @staticmethod
+    def _download_dataset(target_path: Path) -> None:
+        """Download unified dataset to target path if missing locally."""
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+
+        try:
+            response = requests.get(DATASET_URL, stream=True, timeout=120)
+            response.raise_for_status()
+        except requests.RequestException as exc:
+            raise FileNotFoundError(
+                f"Failed to download unified dataset from DATASET_URL: {exc}"
+            ) from exc
+
+        with open(target_path, "wb") as dataset_file:
+            for chunk in response.iter_content(chunk_size=1024 * 1024):
+                if chunk:
+                    dataset_file.write(chunk)
+
+        logger.info(f"✓ Downloaded unified dataset to {target_path}")
+
+    def _resolve_unified_dataset_path(self, base_path: Path) -> Path:
+        """Resolve unified dataset path with support for .csv.gz and .parquet fallbacks."""
+        for candidate in self._candidate_dataset_paths(base_path):
+            if candidate.exists():
+                if candidate != base_path:
+                    logger.warning(
+                        f"Unified dataset missing at {base_path}; using fallback {candidate}"
+                    )
+                return candidate
+
+        raise FileNotFoundError(
+            "Unified dataset not found. Tried: "
+            + ", ".join(str(path) for path in self._candidate_dataset_paths(base_path))
+        )
+
+    @staticmethod
+    def _read_dataset(path: Path) -> DataFrame:
+        """Read dataset file based on extension."""
+        path_str = str(path).lower()
+
+        if path_str.endswith(".parquet"):
+            try:
+                return pd.read_parquet(path)
+            except ImportError as exc:
+                raise ValueError(
+                    "Failed to read parquet file: missing parquet engine. "
+                    "Install 'pyarrow' in requirements."
+                ) from exc
+
+        return pd.read_csv(path)
 
     def load_raw_data(self, force_reload: bool = False) -> DataFrame:
         """
@@ -141,9 +225,9 @@ class MultiCityDataLoader:
 
         logger.info(f"Loading raw data from {self.csv_path}...")
         try:
-            df = pd.read_csv(self.csv_path)
+            df = self._read_dataset(self.csv_path)
         except Exception as e:
-            raise ValueError(f"Failed to read CSV: {e}")
+            raise ValueError(f"Failed to read unified dataset: {e}")
 
         if df.empty:
             raise ValueError("Loaded CSV is empty")
