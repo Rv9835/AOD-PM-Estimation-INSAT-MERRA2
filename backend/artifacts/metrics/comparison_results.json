@@ -1,0 +1,564 @@
+{
+  "scenarios": [
+    {
+      "name": "all_except_bangalore_to_bangalore",
+      "models": [
+        {
+          "name": "linear_regression",
+          "train": {
+            "rmse": 30.824637,
+            "mae": 23.785028,
+            "r2": 0.520556
+          },
+          "test": {
+            "rmse": 20.025052,
+            "mae": 15.341605,
+            "r2": 0.599039
+          },
+          "robustness_score": 75.94,
+          "rmse_ratio": 0.65
+        },
+        {
+          "name": "random_forest",
+          "train": {
+            "rmse": 11.368261,
+            "mae": 8.730027,
+            "r2": 0.934788
+          },
+          "test": {
+            "rmse": 14.323452,
+            "mae": 11.582751,
+            "r2": 0.79486
+          },
+          "robustness_score": 77.29,
+          "rmse_ratio": 1.26
+        },
+        {
+          "name": "xgboost",
+          "train": {
+            "rmse": 0.090365,
+            "mae": 0.061963,
+            "r2": 0.999996
+          },
+          "test": {
+            "rmse": 13.454357,
+            "mae": 12.005423,
+            "r2": 0.818999
+          },
+          "robustness_score": 49.14,
+          "rmse_ratio": 148.89
+        },
+        {
+          "name": "lightgbm",
+          "train": {
+            "rmse": 4.563066,
+            "mae": 3.364178,
+            "r2": 0.989494
+          },
+          "test": {
+            "rmse": 11.23181,
+            "mae": 9.230002,
+            "r2": 0.87386
+          },
+          "robustness_score": 63.2,
+          "rmse_ratio": 2.46
+        },
+        {
+          "name": "neural_network",
+          "train": {
+            "rmse": 49.405279,
+            "mae": 38.920345,
+            "r2": -0.231653
+          },
+          "test": {
+            "rmse": 42.774756,
+            "mae": 31.713188,
+            "r2": -0.829488
+          },
+          "robustness_score": 40.0,
+          "rmse_ratio": 0.87
+        }
+      ]
+    },
+    {
+      "name": "delhi_standalone",
+      "models": [
+        {
+          "name": "linear_regression",
+          "train": {
+            "rmse": 35.60437,
+            "mae": 29.992658,
+            "r2": 0.316031
+          },
+          "test": {
+            "rmse": 52.682583,
+            "mae": 40.901835,
+            "r2": 0.287173
+          },
+          "robustness_score": 38.04,
+          "rmse_ratio": 1.48
+        },
+        {
+          "name": "random_forest",
+          "train": {
+            "rmse": 14.683351,
+            "mae": 11.863057,
+            "r2": 0.883673
+          },
+          "test": {
+            "rmse": 56.494117,
+            "mae": 40.900192,
+            "r2": 0.180297
+          },
+          "robustness_score": 10.82,
+          "rmse_ratio": 3.85
+        },
+        {
+          "name": "xgboost",
+          "train": {
+            "rmse": 0.001004,
+            "mae": 0.000662,
+            "r2": 1.0
+          },
+          "test": {
+            "rmse": 53.082112,
+            "mae": 39.516891,
+            "r2": 0.27632
+          },
+          "robustness_score": 16.58,
+          "rmse_ratio": 52881.33
+        },
+        {
+          "name": "lightgbm",
+          "train": {
+            "rmse": 16.669718,
+            "mae": 13.820525,
+            "r2": 0.850071
+          },
+          "test": {
+            "rmse": 57.426328,
+            "mae": 43.743534,
+            "r2": 0.153022
+          },
+          "robustness_score": 9.18,
+          "rmse_ratio": 3.44
+        },
+        {
+          "name": "neural_network",
+          "train": {
+            "rmse": 57.92711,
+            "mae": 47.60809,
+            "r2": -0.81048
+          },
+          "test": {
+            "rmse": 78.708963,
+            "mae": 67.960193,
+            "r2": -0.591104
+          },
+          "robustness_score": 25.65,
+          "rmse_ratio": 1.36
+        }
+      ]
+    },
+    {
+      "name": "delhi_to_mumbai",
+      "models": [
+        {
+          "name": "linear_regression",
+          "train": {
+            "rmse": 39.160416,
+            "mae": 31.43964,
+            "r2": 0.322342
+          },
+          "test": {
+            "rmse": 24.792283,
+            "mae": 20.031831,
+            "r2": 0.493877
+          },
+          "robustness_score": 69.63,
+          "rmse_ratio": 0.63
+        },
+        {
+          "name": "random_forest",
+          "train": {
+            "rmse": 16.169776,
+            "mae": 12.829951,
+            "r2": 0.884462
+          },
+          "test": {
+            "rmse": 39.19934,
+            "mae": 34.67478,
+            "r2": -0.265263
+          },
+          "robustness_score": 11.52,
+          "rmse_ratio": 2.42
+        },
+        {
+          "name": "xgboost",
+          "train": {
+            "rmse": 0.001499,
+            "mae": 0.000992,
+            "r2": 1.0
+          },
+          "test": {
+            "rmse": 42.980548,
+            "mae": 39.004191,
+            "r2": -0.521133
+          },
+          "robustness_score": 0.0,
+          "rmse_ratio": 28673.84
+        },
+        {
+          "name": "lightgbm",
+          "train": {
+            "rmse": 15.386075,
+            "mae": 12.426963,
+            "r2": 0.89539
+          },
+          "test": {
+            "rmse": 25.854445,
+            "mae": 21.813577,
+            "r2": 0.449581
+          },
+          "robustness_score": 53.37,
+          "rmse_ratio": 1.68
+        },
+        {
+          "name": "neural_network",
+          "train": {
+            "rmse": 79.08671,
+            "mae": 67.98131,
+            "r2": -1.763905
+          },
+          "test": {
+            "rmse": 46.970736,
+            "mae": 38.092775,
+            "r2": -0.816678
+          },
+          "robustness_score": 40.0,
+          "rmse_ratio": 0.59
+        }
+      ]
+    },
+    {
+      "name": "full_multi_city_temporal",
+      "models": [
+        {
+          "name": "linear_regression",
+          "train": {
+            "rmse": 28.018949,
+            "mae": 22.278633,
+            "r2": 0.585449
+          },
+          "test": {
+            "rmse": 34.502661,
+            "mae": 23.538559,
+            "r2": 0.482272
+          },
+          "robustness_score": 59.68,
+          "rmse_ratio": 1.23
+        },
+        {
+          "name": "random_forest",
+          "train": {
+            "rmse": 9.818343,
+            "mae": 7.397016,
+            "r2": 0.949096
+          },
+          "test": {
+            "rmse": 37.761907,
+            "mae": 25.25724,
+            "r2": 0.37984
+          },
+          "robustness_score": 22.79,
+          "rmse_ratio": 3.85
+        },
+        {
+          "name": "xgboost",
+          "train": {
+            "rmse": 0.054972,
+            "mae": 0.039369,
+            "r2": 0.999998
+          },
+          "test": {
+            "rmse": 40.219773,
+            "mae": 28.009716,
+            "r2": 0.296482
+          },
+          "robustness_score": 17.79,
+          "rmse_ratio": 731.64
+        },
+        {
+          "name": "lightgbm",
+          "train": {
+            "rmse": 3.888017,
+            "mae": 2.788868,
+            "r2": 0.992018
+          },
+          "test": {
+            "rmse": 37.78269,
+            "mae": 26.34926,
+            "r2": 0.379157
+          },
+          "robustness_score": 22.75,
+          "rmse_ratio": 9.72
+        },
+        {
+          "name": "neural_network",
+          "train": {
+            "rmse": 64.574766,
+            "mae": 54.370973,
+            "r2": -1.201914
+          },
+          "test": {
+            "rmse": 64.654446,
+            "mae": 51.517996,
+            "r2": -0.817996
+          },
+          "robustness_score": 39.95,
+          "rmse_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "name": "multi_city_to_mumbai",
+      "models": [
+        {
+          "name": "linear_regression",
+          "train": {
+            "rmse": 31.57162,
+            "mae": 23.75171,
+            "r2": 0.588135
+          },
+          "test": {
+            "rmse": 35.571786,
+            "mae": 30.243986,
+            "r2": -0.041921
+          },
+          "robustness_score": 34.93,
+          "rmse_ratio": 1.13
+        },
+        {
+          "name": "random_forest",
+          "train": {
+            "rmse": 12.642162,
+            "mae": 8.91606,
+            "r2": 0.933961
+          },
+          "test": {
+            "rmse": 20.4484,
+            "mae": 16.596014,
+            "r2": 0.655696
+          },
+          "robustness_score": 66.99,
+          "rmse_ratio": 1.62
+        },
+        {
+          "name": "xgboost",
+          "train": {
+            "rmse": 0.02336,
+            "mae": 0.015802,
+            "r2": 1.0
+          },
+          "test": {
+            "rmse": 27.783571,
+            "mae": 21.380654,
+            "r2": 0.364377
+          },
+          "robustness_score": 21.86,
+          "rmse_ratio": 1189.34
+        },
+        {
+          "name": "lightgbm",
+          "train": {
+            "rmse": 7.272853,
+            "mae": 5.28001,
+            "r2": 0.978144
+          },
+          "test": {
+            "rmse": 15.436733,
+            "mae": 12.335227,
+            "r2": 0.803784
+          },
+          "robustness_score": 65.78,
+          "rmse_ratio": 2.12
+        },
+        {
+          "name": "neural_network",
+          "train": {
+            "rmse": 64.136309,
+            "mae": 51.776228,
+            "r2": -0.699686
+          },
+          "test": {
+            "rmse": 50.393004,
+            "mae": 43.10232,
+            "r2": -1.091047
+          },
+          "robustness_score": 40.0,
+          "rmse_ratio": 0.79
+        }
+      ]
+    },
+    {
+      "name": "mumbai_standalone",
+      "models": [
+        {
+          "name": "linear_regression",
+          "train": {
+            "rmse": 22.252731,
+            "mae": 18.745411,
+            "r2": 0.51649
+          },
+          "test": {
+            "rmse": 32.926614,
+            "mae": 25.563647,
+            "r2": 0.450147
+          },
+          "robustness_score": 47.82,
+          "rmse_ratio": 1.48
+        },
+        {
+          "name": "random_forest",
+          "train": {
+            "rmse": 9.290715,
+            "mae": 7.221775,
+            "r2": 0.915718
+          },
+          "test": {
+            "rmse": 36.134765,
+            "mae": 27.282461,
+            "r2": 0.33778
+          },
+          "robustness_score": 20.27,
+          "rmse_ratio": 3.89
+        },
+        {
+          "name": "xgboost",
+          "train": {
+            "rmse": 0.00067,
+            "mae": 0.000444,
+            "r2": 1.0
+          },
+          "test": {
+            "rmse": 34.927021,
+            "mae": 25.826739,
+            "r2": 0.381307
+          },
+          "robustness_score": 22.88,
+          "rmse_ratio": 52167.01
+        },
+        {
+          "name": "lightgbm",
+          "train": {
+            "rmse": 10.434853,
+            "mae": 8.680315,
+            "r2": 0.893681
+          },
+          "test": {
+            "rmse": 36.274888,
+            "mae": 27.384853,
+            "r2": 0.332634
+          },
+          "robustness_score": 19.96,
+          "rmse_ratio": 3.48
+        },
+        {
+          "name": "neural_network",
+          "train": {
+            "rmse": 59.423633,
+            "mae": 51.183792,
+            "r2": -2.44792
+          },
+          "test": {
+            "rmse": 51.045646,
+            "mae": 41.537746,
+            "r2": -0.321507
+          },
+          "robustness_score": 40.0,
+          "rmse_ratio": 0.86
+        }
+      ]
+    },
+    {
+      "name": "mumbai_to_delhi",
+      "models": [
+        {
+          "name": "linear_regression",
+          "train": {
+            "rmse": 24.47526,
+            "mae": 19.649775,
+            "r2": 0.506738
+          },
+          "test": {
+            "rmse": 41.495608,
+            "mae": 32.858504,
+            "r2": 0.239113
+          },
+          "robustness_score": 40.44,
+          "rmse_ratio": 1.7
+        },
+        {
+          "name": "random_forest",
+          "train": {
+            "rmse": 10.198867,
+            "mae": 7.93492,
+            "r2": 0.91435
+          },
+          "test": {
+            "rmse": 47.958245,
+            "mae": 40.044691,
+            "r2": -0.016348
+          },
+          "robustness_score": 0.0,
+          "rmse_ratio": 4.7
+        },
+        {
+          "name": "xgboost",
+          "train": {
+            "rmse": 0.00071,
+            "mae": 0.000499,
+            "r2": 1.0
+          },
+          "test": {
+            "rmse": 46.536928,
+            "mae": 38.775724,
+            "r2": 0.043001
+          },
+          "robustness_score": 2.58,
+          "rmse_ratio": 65558.97
+        },
+        {
+          "name": "lightgbm",
+          "train": {
+            "rmse": 9.68493,
+            "mae": 7.86767,
+            "r2": 0.922765
+          },
+          "test": {
+            "rmse": 44.457742,
+            "mae": 36.565601,
+            "r2": 0.126605
+          },
+          "robustness_score": 7.6,
+          "rmse_ratio": 4.59
+        },
+        {
+          "name": "neural_network",
+          "train": {
+            "rmse": 47.976824,
+            "mae": 38.961081,
+            "r2": -0.895336
+          },
+          "test": {
+            "rmse": 79.491416,
+            "mae": 67.92197,
+            "r2": -1.792264
+          },
+          "robustness_score": 26.86,
+          "rmse_ratio": 1.66
+        }
+      ]
+    }
+  ]
+}

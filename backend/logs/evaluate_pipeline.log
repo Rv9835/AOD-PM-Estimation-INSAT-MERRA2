@@ -1,0 +1,1681 @@
+2026-04-25 01:14:13,596 - airpollution.multi_city_data - INFO - ✓ Loaded configuration from configs/base.yaml
+2026-04-25 01:14:13,596 - airpollution.cities - INFO - ✓ Loaded city config: delhi (National Capital Territory of Delhi)
+2026-04-25 01:14:13,596 - airpollution.cities - INFO - ✓ Loaded city config: mumbai (Mumbai (Bombay))
+2026-04-25 01:14:13,596 - airpollution.cities - INFO - ✓ Loaded city config: bangalore (Bangalore (Bengaluru))
+2026-04-25 01:14:13,596 - airpollution.cities - INFO - ✓ Loaded city config: kolkata (Kolkata (Calcutta))
+2026-04-25 01:14:13,596 - airpollution.cities - INFO - ✓ Loaded city config: hyderabad (Hyderabad)
+2026-04-25 01:14:13,596 - airpollution.multi_city_data - INFO - ✓ Initialized MultiCityDataLoader with CSV: data/processed/unified_dataset.csv
+2026-04-25 01:14:13,596 - __main__ - INFO - ✓ Initialized EvaluationOrchestrator
+2026-04-25 01:14:13,596 - __main__ - INFO -   Config: configs/base.yaml
+2026-04-25 01:14:13,596 - __main__ - INFO -   Model dir: artifacts/models
+2026-04-25 01:14:13,596 - __main__ - INFO -   Metrics dir: artifacts/metrics
+2026-04-25 01:14:13,596 - __main__ - INFO - 
+============================================================
+2026-04-25 01:14:13,596 - __main__ - INFO - 🚀 STARTING EVALUATION PIPELINE
+2026-04-25 01:14:13,596 - __main__ - INFO - ============================================================
+2026-04-25 01:14:13,596 - __main__ - INFO - Scenarios to evaluate: 7
+2026-04-25 01:14:13,596 - __main__ - INFO - 
+============================================================
+2026-04-25 01:14:13,596 - __main__ - INFO - 📊 EVALUATING SCENARIO: delhi_standalone
+2026-04-25 01:14:13,596 - __main__ - INFO - ============================================================
+2026-04-25 01:14:13,596 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: delhi_standalone
+2026-04-25 01:14:13,596 - airpollution.multi_city_data - INFO -    Description: Train and test on Delhi only (baseline robustness: 1.0)
+2026-04-25 01:14:13,596 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi']
+2026-04-25 01:14:13,596 - airpollution.multi_city_data - INFO - Loading raw data from data/processed/unified_dataset.csv...
+2026-04-25 01:14:13,598 - airpollution.multi_city_data - INFO - ✓ Loaded 20 rows with 9 columns
+2026-04-25 01:14:13,599 - airpollution.multi_city_data - INFO - ✓ Filtered 2 rows for delhi (10.0% of total)
+2026-04-25 01:14:13,599 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 2 → 2 rows (100.0% retained)
+2026-04-25 01:14:13,599 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 2 rows
+2026-04-25 01:14:13,599 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi']
+2026-04-25 01:14:13,600 - airpollution.multi_city_data - INFO - ✓ Filtered 2 rows for delhi (10.0% of total)
+2026-04-25 01:14:13,600 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 2 → 2 rows (100.0% retained)
+2026-04-25 01:14:13,600 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 2 rows
+2026-04-25 01:14:13,600 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:14:13,600 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:14:13,601 - airpollution.multi_city_data - INFO - ✓ Scenario 'delhi_standalone' split complete:
+    Train: 1 samples
+    Test:  1 samples
+2026-04-25 01:14:13,601 - __main__ - INFO - Data: 1 train samples, 1 test samples
+2026-04-25 01:14:13,601 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:14:13,601 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/delhi_standalone/linear_regression/model.joblib
+2026-04-25 01:14:13,603 - __main__ - ERROR -     ✗ Evaluation failed: RMSE values must be positive
+2026-04-25 01:14:13,603 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:14:13,603 - __main__ - WARNING - Model file not found: artifacts/models/delhi_standalone/random_forest/model.joblib
+2026-04-25 01:14:13,603 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:14:13,603 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:14:13,603 - __main__ - WARNING - Model file not found: artifacts/models/delhi_standalone/xgboost/model.joblib
+2026-04-25 01:14:13,603 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:14:13,603 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:14:13,605 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/delhi_standalone/lightgbm/model.joblib
+2026-04-25 01:14:13,607 - __main__ - ERROR -     ✗ Evaluation failed: RMSE values must be positive
+2026-04-25 01:14:13,607 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:14:13,607 - __main__ - WARNING - Model file not found: artifacts/models/delhi_standalone/neural_network/model.joblib
+2026-04-25 01:14:13,607 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:14:13,607 - __main__ - ERROR - ✗ Scenario 'delhi_standalone' failed: No models evaluated for scenario: delhi_standalone
+2026-04-25 01:14:13,607 - __main__ - INFO - 
+============================================================
+2026-04-25 01:14:13,607 - __main__ - INFO - 📊 EVALUATING SCENARIO: mumbai_standalone
+2026-04-25 01:14:13,607 - __main__ - INFO - ============================================================
+2026-04-25 01:14:13,607 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: mumbai_standalone
+2026-04-25 01:14:13,607 - airpollution.multi_city_data - INFO -    Description: Train and test on Mumbai only
+2026-04-25 01:14:13,607 - airpollution.multi_city_data - INFO -    Loading training cities: ['mumbai']
+2026-04-25 01:14:13,608 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for mumbai (5.0% of total)
+2026-04-25 01:14:13,608 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,608 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 1 rows
+2026-04-25 01:14:13,608 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:14:13,609 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for mumbai (5.0% of total)
+2026-04-25 01:14:13,609 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,609 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 1 rows
+2026-04-25 01:14:13,609 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:14:13,609 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:14:13,609 - airpollution.multi_city_data - INFO - ✓ Scenario 'mumbai_standalone' split complete:
+    Train: 0 samples
+    Test:  1 samples
+2026-04-25 01:14:13,609 - __main__ - INFO - Data: 0 train samples, 1 test samples
+2026-04-25 01:14:13,610 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:14:13,610 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_standalone/linear_regression/model.joblib
+2026-04-25 01:14:13,610 - __main__ - WARNING -     ⚠ Skipping linear_regression (model not found)
+2026-04-25 01:14:13,610 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:14:13,610 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_standalone/random_forest/model.joblib
+2026-04-25 01:14:13,610 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:14:13,610 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:14:13,610 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_standalone/xgboost/model.joblib
+2026-04-25 01:14:13,610 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:14:13,610 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:14:13,610 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_standalone/lightgbm/model.joblib
+2026-04-25 01:14:13,610 - __main__ - WARNING -     ⚠ Skipping lightgbm (model not found)
+2026-04-25 01:14:13,610 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:14:13,610 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_standalone/neural_network/model.joblib
+2026-04-25 01:14:13,610 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:14:13,610 - __main__ - ERROR - ✗ Scenario 'mumbai_standalone' failed: No models evaluated for scenario: mumbai_standalone
+2026-04-25 01:14:13,610 - __main__ - INFO - 
+============================================================
+2026-04-25 01:14:13,610 - __main__ - INFO - 📊 EVALUATING SCENARIO: delhi_to_mumbai
+2026-04-25 01:14:13,610 - __main__ - INFO - ============================================================
+2026-04-25 01:14:13,610 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: delhi_to_mumbai
+2026-04-25 01:14:13,610 - airpollution.multi_city_data - INFO -    Description: Train on Delhi, test on completely unseen Mumbai (robustness test)
+2026-04-25 01:14:13,610 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi']
+2026-04-25 01:14:13,610 - airpollution.multi_city_data - INFO - ✓ Filtered 2 rows for delhi (10.0% of total)
+2026-04-25 01:14:13,611 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 2 → 2 rows (100.0% retained)
+2026-04-25 01:14:13,611 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 2 rows
+2026-04-25 01:14:13,611 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:14:13,611 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for mumbai (5.0% of total)
+2026-04-25 01:14:13,611 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,611 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 1 rows
+2026-04-25 01:14:13,611 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:14:13,612 - airpollution.multi_city_data - INFO - ✓ Scenario 'delhi_to_mumbai' split complete:
+    Train: 2 samples
+    Test:  1 samples
+2026-04-25 01:14:13,612 - __main__ - INFO - Data: 2 train samples, 1 test samples
+2026-04-25 01:14:13,612 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:14:13,612 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/delhi_to_mumbai/linear_regression/model.joblib
+2026-04-25 01:14:13,614 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on delhi_to_mumbai:
+    Train: RMSE=0.0000, MAE=0.0000, R²=1.0000
+    Test:  RMSE=7.3693, MAE=7.3693, R²=nan
+    Robustness: 60.00/100 (RMSE ratio: 366682631112474.44x)
+2026-04-25 01:14:13,614 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:14:13,614 - __main__ - WARNING - Model file not found: artifacts/models/delhi_to_mumbai/random_forest/model.joblib
+2026-04-25 01:14:13,614 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:14:13,614 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:14:13,614 - __main__ - WARNING - Model file not found: artifacts/models/delhi_to_mumbai/xgboost/model.joblib
+2026-04-25 01:14:13,614 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:14:13,614 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:14:13,615 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/delhi_to_mumbai/lightgbm/model.joblib
+2026-04-25 01:14:13,616 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on delhi_to_mumbai:
+    Train: RMSE=10.5000, MAE=10.5000, R²=0.0000
+    Test:  RMSE=2.5000, MAE=2.5000, R²=nan
+    Robustness: 100.00/100 (RMSE ratio: 0.24x)
+2026-04-25 01:14:13,617 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:14:13,641 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:14:13,641 - __main__ - ERROR - Failed to load model from artifacts/models/delhi_to_mumbai/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:14:13,641 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:14:13,641 - __main__ - INFO - 
+✓ Scenario complete: 2 models evaluated
+2026-04-25 01:14:13,641 - __main__ - INFO - 
+============================================================
+2026-04-25 01:14:13,641 - __main__ - INFO - 📊 EVALUATING SCENARIO: mumbai_to_delhi
+2026-04-25 01:14:13,641 - __main__ - INFO - ============================================================
+2026-04-25 01:14:13,641 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: mumbai_to_delhi
+2026-04-25 01:14:13,641 - airpollution.multi_city_data - INFO -    Description: Train on Mumbai, test on completely unseen Delhi
+2026-04-25 01:14:13,641 - airpollution.multi_city_data - INFO -    Loading training cities: ['mumbai']
+2026-04-25 01:14:13,642 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for mumbai (5.0% of total)
+2026-04-25 01:14:13,642 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,642 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 1 rows
+2026-04-25 01:14:13,642 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi']
+2026-04-25 01:14:13,643 - airpollution.multi_city_data - INFO - ✓ Filtered 2 rows for delhi (10.0% of total)
+2026-04-25 01:14:13,643 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 2 → 2 rows (100.0% retained)
+2026-04-25 01:14:13,643 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 2 rows
+2026-04-25 01:14:13,643 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:14:13,643 - airpollution.multi_city_data - INFO - ✓ Scenario 'mumbai_to_delhi' split complete:
+    Train: 1 samples
+    Test:  2 samples
+2026-04-25 01:14:13,643 - __main__ - INFO - Data: 1 train samples, 2 test samples
+2026-04-25 01:14:13,643 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:14:13,644 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/mumbai_to_delhi/linear_regression/model.joblib
+2026-04-25 01:14:13,645 - __main__ - ERROR -     ✗ Evaluation failed: RMSE values must be positive
+2026-04-25 01:14:13,645 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:14:13,645 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_to_delhi/random_forest/model.joblib
+2026-04-25 01:14:13,645 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:14:13,645 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:14:13,645 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_to_delhi/xgboost/model.joblib
+2026-04-25 01:14:13,645 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:14:13,645 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:14:13,646 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/mumbai_to_delhi/lightgbm/model.joblib
+2026-04-25 01:14:13,647 - __main__ - ERROR -     ✗ Evaluation failed: RMSE values must be positive
+2026-04-25 01:14:13,647 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:14:13,647 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_to_delhi/neural_network/model.joblib
+2026-04-25 01:14:13,647 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:14:13,647 - __main__ - ERROR - ✗ Scenario 'mumbai_to_delhi' failed: No models evaluated for scenario: mumbai_to_delhi
+2026-04-25 01:14:13,647 - __main__ - INFO - 
+============================================================
+2026-04-25 01:14:13,647 - __main__ - INFO - 📊 EVALUATING SCENARIO: multi_city_to_mumbai
+2026-04-25 01:14:13,647 - __main__ - INFO - ============================================================
+2026-04-25 01:14:13,647 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: multi_city_to_mumbai
+2026-04-25 01:14:13,647 - airpollution.multi_city_data - INFO -    Description: Train on Delhi+Bangalore+Hyderabad, test on isolated Mumbai
+2026-04-25 01:14:13,647 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'bangalore', 'hyderabad']
+2026-04-25 01:14:13,648 - airpollution.multi_city_data - INFO - ✓ Filtered 2 rows for delhi (10.0% of total)
+2026-04-25 01:14:13,648 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 2 → 2 rows (100.0% retained)
+2026-04-25 01:14:13,648 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for bangalore (5.0% of total)
+2026-04-25 01:14:13,649 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,649 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for hyderabad (5.0% of total)
+2026-04-25 01:14:13,649 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,649 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 4 rows
+2026-04-25 01:14:13,649 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:14:13,650 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for mumbai (5.0% of total)
+2026-04-25 01:14:13,650 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,650 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 1 rows
+2026-04-25 01:14:13,650 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:14:13,651 - airpollution.multi_city_data - INFO - ✓ Scenario 'multi_city_to_mumbai' split complete:
+    Train: 4 samples
+    Test:  1 samples
+2026-04-25 01:14:13,651 - __main__ - INFO - Data: 4 train samples, 1 test samples
+2026-04-25 01:14:13,651 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:14:13,651 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/multi_city_to_mumbai/linear_regression/model.joblib
+2026-04-25 01:14:13,652 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on multi_city_to_mumbai:
+    Train: RMSE=0.0000, MAE=0.0000, R²=1.0000
+    Test:  RMSE=10.6047, MAE=10.6047, R²=nan
+    Robustness: 60.00/100 (RMSE ratio: 636393538396477.75x)
+2026-04-25 01:14:13,652 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:14:13,652 - __main__ - WARNING - Model file not found: artifacts/models/multi_city_to_mumbai/random_forest/model.joblib
+2026-04-25 01:14:13,652 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:14:13,652 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:14:13,652 - __main__ - WARNING - Model file not found: artifacts/models/multi_city_to_mumbai/xgboost/model.joblib
+2026-04-25 01:14:13,652 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:14:13,652 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:14:13,652 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/multi_city_to_mumbai/lightgbm/model.joblib
+2026-04-25 01:14:13,654 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on multi_city_to_mumbai:
+    Train: RMSE=22.5887, MAE=20.0000, R²=0.0000
+    Test:  RMSE=22.5000, MAE=22.5000, R²=nan
+    Robustness: 100.00/100 (RMSE ratio: 1.00x)
+2026-04-25 01:14:13,654 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:14:13,666 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:14:13,666 - __main__ - ERROR - Failed to load model from artifacts/models/multi_city_to_mumbai/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:14:13,667 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:14:13,667 - __main__ - INFO - 
+✓ Scenario complete: 2 models evaluated
+2026-04-25 01:14:13,667 - __main__ - INFO - 
+============================================================
+2026-04-25 01:14:13,667 - __main__ - INFO - 📊 EVALUATING SCENARIO: all_except_bangalore_to_bangalore
+2026-04-25 01:14:13,667 - __main__ - INFO - ============================================================
+2026-04-25 01:14:13,667 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: all_except_bangalore_to_bangalore
+2026-04-25 01:14:13,667 - airpollution.multi_city_data - INFO -    Description: Train on 4 cities, test on isolated Bangalore
+2026-04-25 01:14:13,667 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'mumbai', 'kolkata', 'hyderabad']
+2026-04-25 01:14:13,667 - airpollution.multi_city_data - INFO - ✓ Filtered 2 rows for delhi (10.0% of total)
+2026-04-25 01:14:13,668 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 2 → 2 rows (100.0% retained)
+2026-04-25 01:14:13,668 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for mumbai (5.0% of total)
+2026-04-25 01:14:13,668 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,669 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for kolkata (5.0% of total)
+2026-04-25 01:14:13,669 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,669 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for hyderabad (5.0% of total)
+2026-04-25 01:14:13,670 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,670 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 5 rows
+2026-04-25 01:14:13,670 - airpollution.multi_city_data - INFO -    Loading test cities: ['bangalore']
+2026-04-25 01:14:13,670 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for bangalore (5.0% of total)
+2026-04-25 01:14:13,670 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,670 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 1 rows
+2026-04-25 01:14:13,670 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:14:13,671 - airpollution.multi_city_data - INFO - ✓ Scenario 'all_except_bangalore_to_bangalore' split complete:
+    Train: 5 samples
+    Test:  1 samples
+2026-04-25 01:14:13,671 - __main__ - INFO - Data: 5 train samples, 1 test samples
+2026-04-25 01:14:13,671 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:14:13,671 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/all_except_bangalore_to_bangalore/linear_regression/model.joblib
+2026-04-25 01:14:13,672 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on all_except_bangalore_to_bangalore:
+    Train: RMSE=0.0000, MAE=0.0000, R²=1.0000
+    Test:  RMSE=2.5869, MAE=2.5869, R²=nan
+    Robustness: 60.00/100 (RMSE ratio: 12943479302499.18x)
+2026-04-25 01:14:13,672 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:14:13,672 - __main__ - WARNING - Model file not found: artifacts/models/all_except_bangalore_to_bangalore/random_forest/model.joblib
+2026-04-25 01:14:13,672 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:14:13,672 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:14:13,672 - __main__ - WARNING - Model file not found: artifacts/models/all_except_bangalore_to_bangalore/xgboost/model.joblib
+2026-04-25 01:14:13,672 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:14:13,672 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:14:13,673 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/all_except_bangalore_to_bangalore/lightgbm/model.joblib
+2026-04-25 01:14:13,674 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on all_except_bangalore_to_bangalore:
+    Train: RMSE=21.1943, MAE=16.0000, R²=0.0000
+    Test:  RMSE=19.0000, MAE=19.0000, R²=nan
+    Robustness: 100.00/100 (RMSE ratio: 0.90x)
+2026-04-25 01:14:13,674 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:14:13,685 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:14:13,685 - __main__ - ERROR - Failed to load model from artifacts/models/all_except_bangalore_to_bangalore/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:14:13,685 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:14:13,685 - __main__ - INFO - 
+✓ Scenario complete: 2 models evaluated
+2026-04-25 01:14:13,685 - __main__ - INFO - 
+============================================================
+2026-04-25 01:14:13,685 - __main__ - INFO - 📊 EVALUATING SCENARIO: full_multi_city_temporal
+2026-04-25 01:14:13,685 - __main__ - INFO - ============================================================
+2026-04-25 01:14:13,685 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: full_multi_city_temporal
+2026-04-25 01:14:13,685 - airpollution.multi_city_data - INFO -    Description: Train on all 5 cities (80%), test on all 5 cities (20%) - temporal split
+2026-04-25 01:14:13,685 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'mumbai', 'bangalore', 'kolkata', 'hyderabad']
+2026-04-25 01:14:13,686 - airpollution.multi_city_data - INFO - ✓ Filtered 2 rows for delhi (10.0% of total)
+2026-04-25 01:14:13,687 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 2 → 2 rows (100.0% retained)
+2026-04-25 01:14:13,687 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for mumbai (5.0% of total)
+2026-04-25 01:14:13,687 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,687 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for bangalore (5.0% of total)
+2026-04-25 01:14:13,688 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,688 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for kolkata (5.0% of total)
+2026-04-25 01:14:13,689 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,689 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for hyderabad (5.0% of total)
+2026-04-25 01:14:13,689 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,689 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 6 rows
+2026-04-25 01:14:13,689 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi', 'mumbai', 'bangalore', 'kolkata', 'hyderabad']
+2026-04-25 01:14:13,690 - airpollution.multi_city_data - INFO - ✓ Filtered 2 rows for delhi (10.0% of total)
+2026-04-25 01:14:13,690 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 2 → 2 rows (100.0% retained)
+2026-04-25 01:14:13,690 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for mumbai (5.0% of total)
+2026-04-25 01:14:13,691 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,691 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for bangalore (5.0% of total)
+2026-04-25 01:14:13,692 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,692 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for kolkata (5.0% of total)
+2026-04-25 01:14:13,692 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,692 - airpollution.multi_city_data - INFO - ✓ Filtered 1 rows for hyderabad (5.0% of total)
+2026-04-25 01:14:13,693 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 1 → 1 rows (100.0% retained)
+2026-04-25 01:14:13,693 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 6 rows
+2026-04-25 01:14:13,693 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:14:13,693 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:14:13,693 - airpollution.multi_city_data - INFO - ✓ Scenario 'full_multi_city_temporal' split complete:
+    Train: 4 samples
+    Test:  2 samples
+2026-04-25 01:14:13,693 - __main__ - INFO - Data: 4 train samples, 2 test samples
+2026-04-25 01:14:13,693 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:14:13,694 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/full_multi_city_temporal/linear_regression/model.joblib
+2026-04-25 01:14:13,695 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on full_multi_city_temporal:
+    Train: RMSE=0.0000, MAE=0.0000, R²=1.0000
+    Test:  RMSE=6.4992, MAE=4.8882, R²=0.9546
+    Robustness: 57.28/100 (RMSE ratio: 528095015466638.69x)
+2026-04-25 01:14:13,695 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:14:13,695 - __main__ - WARNING - Model file not found: artifacts/models/full_multi_city_temporal/random_forest/model.joblib
+2026-04-25 01:14:13,695 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:14:13,695 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:14:13,695 - __main__ - WARNING - Model file not found: artifacts/models/full_multi_city_temporal/xgboost/model.joblib
+2026-04-25 01:14:13,695 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:14:13,695 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:14:13,696 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/full_multi_city_temporal/lightgbm/model.joblib
+2026-04-25 01:14:13,697 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on full_multi_city_temporal:
+    Train: RMSE=11.8954, MAE=9.5000, R²=0.0000
+    Test:  RMSE=31.9453, MAE=30.5000, R²=-0.0970
+    Robustness: 6.29/100 (RMSE ratio: 2.69x)
+2026-04-25 01:14:13,697 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:14:13,708 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:14:13,708 - __main__ - ERROR - Failed to load model from artifacts/models/full_multi_city_temporal/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:14:13,708 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:14:13,708 - __main__ - INFO - 
+✓ Scenario complete: 2 models evaluated
+2026-04-25 01:14:13,708 - __main__ - INFO - 
+============================================================
+2026-04-25 01:14:13,708 - __main__ - INFO - ✓ EVALUATION PIPELINE COMPLETE
+2026-04-25 01:14:13,708 - __main__ - INFO - ============================================================
+2026-04-25 01:14:13,711 - __main__ - INFO - ✓ Evaluated scenarios: 4
+2026-04-25 01:14:13,711 - __main__ - INFO - ✓ Total evaluations: 8
+2026-04-25 01:14:13,711 - __main__ - WARNING - ⚠ Failed scenarios: ['delhi_standalone', 'mumbai_standalone', 'mumbai_to_delhi']
+2026-04-25 01:14:13,711 - __main__ - INFO - 
+============================================================
+2026-04-25 01:14:13,711 - __main__ - INFO - 📋 GENERATING REPORTS
+2026-04-25 01:14:13,711 - __main__ - INFO - ============================================================
+2026-04-25 01:14:13,724 - __main__ - INFO - ✓ Markdown report saved: artifacts/metrics/COMPARISON_REPORT.md
+2026-04-25 01:14:13,725 - __main__ - INFO - ✓ JSON report saved: artifacts/metrics/comparison_results.json
+2026-04-25 01:14:13,725 - __main__ - INFO - ✓ Results CSV saved: artifacts/metrics/all_results.csv
+2026-04-25 01:14:13,725 - __main__ - INFO - 
+============================================================
+2026-04-25 01:14:13,725 - __main__ - INFO - ✓ ALL REPORTS GENERATED
+2026-04-25 01:14:13,725 - __main__ - INFO - ============================================================
+2026-04-25 01:14:13,725 - __main__ - INFO - ✓ All evaluation complete!
+2026-04-25 01:18:04,636 - airpollution.multi_city_data - INFO - ✓ Loaded configuration from configs/base.yaml
+2026-04-25 01:18:04,636 - airpollution.cities - INFO - ✓ Loaded city config: delhi (National Capital Territory of Delhi)
+2026-04-25 01:18:04,636 - airpollution.cities - INFO - ✓ Loaded city config: mumbai (Mumbai (Bombay))
+2026-04-25 01:18:04,636 - airpollution.cities - INFO - ✓ Loaded city config: bangalore (Bangalore (Bengaluru))
+2026-04-25 01:18:04,636 - airpollution.cities - INFO - ✓ Loaded city config: kolkata (Kolkata (Calcutta))
+2026-04-25 01:18:04,636 - airpollution.cities - INFO - ✓ Loaded city config: hyderabad (Hyderabad)
+2026-04-25 01:18:04,636 - airpollution.multi_city_data - INFO - ✓ Initialized MultiCityDataLoader with CSV: data/processed/unified_dataset.csv
+2026-04-25 01:18:04,636 - __main__ - INFO - ✓ Initialized EvaluationOrchestrator
+2026-04-25 01:18:04,636 - __main__ - INFO -   Config: configs/base.yaml
+2026-04-25 01:18:04,636 - __main__ - INFO -   Model dir: artifacts/models
+2026-04-25 01:18:04,636 - __main__ - INFO -   Metrics dir: artifacts/metrics
+2026-04-25 01:18:04,636 - __main__ - INFO - 
+============================================================
+2026-04-25 01:18:04,636 - __main__ - INFO - 🚀 STARTING EVALUATION PIPELINE
+2026-04-25 01:18:04,636 - __main__ - INFO - ============================================================
+2026-04-25 01:18:04,636 - __main__ - INFO - Scenarios to evaluate: 7
+2026-04-25 01:18:04,636 - __main__ - INFO - 
+============================================================
+2026-04-25 01:18:04,636 - __main__ - INFO - 📊 EVALUATING SCENARIO: delhi_standalone
+2026-04-25 01:18:04,636 - __main__ - INFO - ============================================================
+2026-04-25 01:18:04,636 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: delhi_standalone
+2026-04-25 01:18:04,636 - airpollution.multi_city_data - INFO -    Description: Train and test on Delhi only (baseline robustness: 1.0)
+2026-04-25 01:18:04,636 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi']
+2026-04-25 01:18:04,636 - airpollution.multi_city_data - INFO - Loading raw data from data/processed/unified_dataset.csv...
+2026-04-25 01:18:04,638 - airpollution.multi_city_data - INFO - ✓ Loaded 540 rows with 9 columns
+2026-04-25 01:18:04,639 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:18:04,639 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,639 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:18:04,639 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi']
+2026-04-25 01:18:04,640 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:18:04,640 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,640 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:18:04,640 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:18:04,640 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:18:04,641 - airpollution.multi_city_data - INFO - ✓ Scenario 'delhi_standalone' split complete:
+    Train: 96 samples
+    Test:  24 samples
+2026-04-25 01:18:04,641 - __main__ - INFO - Data: 96 train samples, 24 test samples
+2026-04-25 01:18:04,641 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:18:04,641 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/delhi_standalone/linear_regression/model.joblib
+2026-04-25 01:18:04,642 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on delhi_standalone:
+    Train: RMSE=35.6044, MAE=29.9927, R²=0.3160
+    Test:  RMSE=52.6826, MAE=40.9018, R²=0.2872
+    Robustness: 38.04/100 (RMSE ratio: 1.48x)
+2026-04-25 01:18:04,642 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:18:04,642 - __main__ - WARNING - Model file not found: artifacts/models/delhi_standalone/random_forest/model.joblib
+2026-04-25 01:18:04,642 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:18:04,642 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:18:04,642 - __main__ - WARNING - Model file not found: artifacts/models/delhi_standalone/xgboost/model.joblib
+2026-04-25 01:18:04,642 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:18:04,642 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:18:04,644 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/delhi_standalone/lightgbm/model.joblib
+2026-04-25 01:18:04,646 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on delhi_standalone:
+    Train: RMSE=16.6697, MAE=13.8205, R²=0.8501
+    Test:  RMSE=57.4263, MAE=43.7435, R²=0.1530
+    Robustness: 9.18/100 (RMSE ratio: 3.44x)
+2026-04-25 01:18:04,646 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:18:04,668 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,668 - __main__ - ERROR - Failed to load model from artifacts/models/delhi_standalone/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,668 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:18:04,668 - __main__ - INFO - 
+✓ Scenario complete: 2 models evaluated
+2026-04-25 01:18:04,668 - __main__ - INFO - 
+============================================================
+2026-04-25 01:18:04,669 - __main__ - INFO - 📊 EVALUATING SCENARIO: mumbai_standalone
+2026-04-25 01:18:04,669 - __main__ - INFO - ============================================================
+2026-04-25 01:18:04,669 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: mumbai_standalone
+2026-04-25 01:18:04,669 - airpollution.multi_city_data - INFO -    Description: Train and test on Mumbai only
+2026-04-25 01:18:04,669 - airpollution.multi_city_data - INFO -    Loading training cities: ['mumbai']
+2026-04-25 01:18:04,669 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:18:04,670 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,670 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:18:04,670 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:18:04,670 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:18:04,670 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,671 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:18:04,671 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:18:04,671 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:18:04,671 - airpollution.multi_city_data - INFO - ✓ Scenario 'mumbai_standalone' split complete:
+    Train: 96 samples
+    Test:  24 samples
+2026-04-25 01:18:04,671 - __main__ - INFO - Data: 96 train samples, 24 test samples
+2026-04-25 01:18:04,671 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:18:04,671 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/mumbai_standalone/linear_regression/model.joblib
+2026-04-25 01:18:04,672 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on mumbai_standalone:
+    Train: RMSE=22.2527, MAE=18.7454, R²=0.5165
+    Test:  RMSE=32.9266, MAE=25.5636, R²=0.4501
+    Robustness: 47.82/100 (RMSE ratio: 1.48x)
+2026-04-25 01:18:04,672 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:18:04,672 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_standalone/random_forest/model.joblib
+2026-04-25 01:18:04,672 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:18:04,672 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:18:04,672 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_standalone/xgboost/model.joblib
+2026-04-25 01:18:04,672 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:18:04,672 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:18:04,673 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/mumbai_standalone/lightgbm/model.joblib
+2026-04-25 01:18:04,674 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on mumbai_standalone:
+    Train: RMSE=10.4349, MAE=8.6803, R²=0.8937
+    Test:  RMSE=36.2749, MAE=27.3849, R²=0.3326
+    Robustness: 19.96/100 (RMSE ratio: 3.48x)
+2026-04-25 01:18:04,675 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:18:04,686 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,686 - __main__ - ERROR - Failed to load model from artifacts/models/mumbai_standalone/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,686 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:18:04,686 - __main__ - INFO - 
+✓ Scenario complete: 2 models evaluated
+2026-04-25 01:18:04,686 - __main__ - INFO - 
+============================================================
+2026-04-25 01:18:04,686 - __main__ - INFO - 📊 EVALUATING SCENARIO: delhi_to_mumbai
+2026-04-25 01:18:04,686 - __main__ - INFO - ============================================================
+2026-04-25 01:18:04,686 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: delhi_to_mumbai
+2026-04-25 01:18:04,686 - airpollution.multi_city_data - INFO -    Description: Train on Delhi, test on completely unseen Mumbai (robustness test)
+2026-04-25 01:18:04,686 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi']
+2026-04-25 01:18:04,687 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:18:04,687 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,687 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:18:04,688 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:18:04,688 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:18:04,688 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,688 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:18:04,688 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:18:04,689 - airpollution.multi_city_data - INFO - ✓ Scenario 'delhi_to_mumbai' split complete:
+    Train: 120 samples
+    Test:  120 samples
+2026-04-25 01:18:04,689 - __main__ - INFO - Data: 120 train samples, 120 test samples
+2026-04-25 01:18:04,689 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:18:04,689 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/delhi_to_mumbai/linear_regression/model.joblib
+2026-04-25 01:18:04,690 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on delhi_to_mumbai:
+    Train: RMSE=39.1604, MAE=31.4396, R²=0.3223
+    Test:  RMSE=24.7923, MAE=20.0318, R²=0.4939
+    Robustness: 69.63/100 (RMSE ratio: 0.63x)
+2026-04-25 01:18:04,690 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:18:04,690 - __main__ - WARNING - Model file not found: artifacts/models/delhi_to_mumbai/random_forest/model.joblib
+2026-04-25 01:18:04,690 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:18:04,690 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:18:04,690 - __main__ - WARNING - Model file not found: artifacts/models/delhi_to_mumbai/xgboost/model.joblib
+2026-04-25 01:18:04,690 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:18:04,690 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:18:04,691 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/delhi_to_mumbai/lightgbm/model.joblib
+2026-04-25 01:18:04,692 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on delhi_to_mumbai:
+    Train: RMSE=15.3861, MAE=12.4270, R²=0.8954
+    Test:  RMSE=25.8544, MAE=21.8136, R²=0.4496
+    Robustness: 53.37/100 (RMSE ratio: 1.68x)
+2026-04-25 01:18:04,692 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:18:04,702 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,702 - __main__ - ERROR - Failed to load model from artifacts/models/delhi_to_mumbai/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,702 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:18:04,702 - __main__ - INFO - 
+✓ Scenario complete: 2 models evaluated
+2026-04-25 01:18:04,702 - __main__ - INFO - 
+============================================================
+2026-04-25 01:18:04,702 - __main__ - INFO - 📊 EVALUATING SCENARIO: mumbai_to_delhi
+2026-04-25 01:18:04,702 - __main__ - INFO - ============================================================
+2026-04-25 01:18:04,702 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: mumbai_to_delhi
+2026-04-25 01:18:04,702 - airpollution.multi_city_data - INFO -    Description: Train on Mumbai, test on completely unseen Delhi
+2026-04-25 01:18:04,702 - airpollution.multi_city_data - INFO -    Loading training cities: ['mumbai']
+2026-04-25 01:18:04,703 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:18:04,703 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,703 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:18:04,703 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi']
+2026-04-25 01:18:04,704 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:18:04,704 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,704 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:18:04,704 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:18:04,705 - airpollution.multi_city_data - INFO - ✓ Scenario 'mumbai_to_delhi' split complete:
+    Train: 120 samples
+    Test:  120 samples
+2026-04-25 01:18:04,705 - __main__ - INFO - Data: 120 train samples, 120 test samples
+2026-04-25 01:18:04,705 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:18:04,705 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/mumbai_to_delhi/linear_regression/model.joblib
+2026-04-25 01:18:04,706 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on mumbai_to_delhi:
+    Train: RMSE=24.4753, MAE=19.6498, R²=0.5067
+    Test:  RMSE=41.4956, MAE=32.8585, R²=0.2391
+    Robustness: 40.44/100 (RMSE ratio: 1.70x)
+2026-04-25 01:18:04,706 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:18:04,706 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_to_delhi/random_forest/model.joblib
+2026-04-25 01:18:04,706 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:18:04,706 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:18:04,706 - __main__ - WARNING - Model file not found: artifacts/models/mumbai_to_delhi/xgboost/model.joblib
+2026-04-25 01:18:04,706 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:18:04,706 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:18:04,707 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/mumbai_to_delhi/lightgbm/model.joblib
+2026-04-25 01:18:04,708 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on mumbai_to_delhi:
+    Train: RMSE=9.6849, MAE=7.8677, R²=0.9228
+    Test:  RMSE=44.4577, MAE=36.5656, R²=0.1266
+    Robustness: 7.60/100 (RMSE ratio: 4.59x)
+2026-04-25 01:18:04,708 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:18:04,718 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,718 - __main__ - ERROR - Failed to load model from artifacts/models/mumbai_to_delhi/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,718 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:18:04,718 - __main__ - INFO - 
+✓ Scenario complete: 2 models evaluated
+2026-04-25 01:18:04,718 - __main__ - INFO - 
+============================================================
+2026-04-25 01:18:04,718 - __main__ - INFO - 📊 EVALUATING SCENARIO: multi_city_to_mumbai
+2026-04-25 01:18:04,718 - __main__ - INFO - ============================================================
+2026-04-25 01:18:04,718 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: multi_city_to_mumbai
+2026-04-25 01:18:04,718 - airpollution.multi_city_data - INFO -    Description: Train on Delhi+Bangalore+Hyderabad, test on isolated Mumbai
+2026-04-25 01:18:04,718 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'bangalore', 'hyderabad']
+2026-04-25 01:18:04,718 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:18:04,719 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,719 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:18:04,720 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:18:04,720 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:18:04,720 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:18:04,720 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 231 rows
+2026-04-25 01:18:04,720 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:18:04,721 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:18:04,721 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,721 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:18:04,721 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:18:04,722 - airpollution.multi_city_data - INFO - ✓ Scenario 'multi_city_to_mumbai' split complete:
+    Train: 231 samples
+    Test:  120 samples
+2026-04-25 01:18:04,722 - __main__ - INFO - Data: 231 train samples, 120 test samples
+2026-04-25 01:18:04,722 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:18:04,722 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/multi_city_to_mumbai/linear_regression/model.joblib
+2026-04-25 01:18:04,723 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on multi_city_to_mumbai:
+    Train: RMSE=31.5716, MAE=23.7517, R²=0.5881
+    Test:  RMSE=35.5718, MAE=30.2440, R²=-0.0419
+    Robustness: 34.93/100 (RMSE ratio: 1.13x)
+2026-04-25 01:18:04,723 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:18:04,723 - __main__ - WARNING - Model file not found: artifacts/models/multi_city_to_mumbai/random_forest/model.joblib
+2026-04-25 01:18:04,723 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:18:04,723 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:18:04,723 - __main__ - WARNING - Model file not found: artifacts/models/multi_city_to_mumbai/xgboost/model.joblib
+2026-04-25 01:18:04,723 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:18:04,723 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:18:04,724 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/multi_city_to_mumbai/lightgbm/model.joblib
+2026-04-25 01:18:04,725 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on multi_city_to_mumbai:
+    Train: RMSE=7.2729, MAE=5.2800, R²=0.9781
+    Test:  RMSE=15.4367, MAE=12.3352, R²=0.8038
+    Robustness: 65.78/100 (RMSE ratio: 2.12x)
+2026-04-25 01:18:04,725 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:18:04,735 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,735 - __main__ - ERROR - Failed to load model from artifacts/models/multi_city_to_mumbai/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,735 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:18:04,735 - __main__ - INFO - 
+✓ Scenario complete: 2 models evaluated
+2026-04-25 01:18:04,735 - __main__ - INFO - 
+============================================================
+2026-04-25 01:18:04,735 - __main__ - INFO - 📊 EVALUATING SCENARIO: all_except_bangalore_to_bangalore
+2026-04-25 01:18:04,735 - __main__ - INFO - ============================================================
+2026-04-25 01:18:04,735 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: all_except_bangalore_to_bangalore
+2026-04-25 01:18:04,735 - airpollution.multi_city_data - INFO -    Description: Train on 4 cities, test on isolated Bangalore
+2026-04-25 01:18:04,735 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'mumbai', 'kolkata', 'hyderabad']
+2026-04-25 01:18:04,736 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:18:04,736 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,737 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:18:04,737 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,737 - airpollution.multi_city_data - INFO - ✓ Filtered 45 rows for kolkata (8.3% of total)
+2026-04-25 01:18:04,738 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 45 → 45 rows (100.0% retained)
+2026-04-25 01:18:04,738 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:18:04,738 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:18:04,739 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 335 rows
+2026-04-25 01:18:04,739 - airpollution.multi_city_data - INFO -    Loading test cities: ['bangalore']
+2026-04-25 01:18:04,739 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:18:04,739 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:18:04,739 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 61 rows
+2026-04-25 01:18:04,739 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:18:04,740 - airpollution.multi_city_data - INFO - ✓ Scenario 'all_except_bangalore_to_bangalore' split complete:
+    Train: 335 samples
+    Test:  61 samples
+2026-04-25 01:18:04,740 - __main__ - INFO - Data: 335 train samples, 61 test samples
+2026-04-25 01:18:04,740 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:18:04,740 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/all_except_bangalore_to_bangalore/linear_regression/model.joblib
+2026-04-25 01:18:04,741 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on all_except_bangalore_to_bangalore:
+    Train: RMSE=30.8246, MAE=23.7850, R²=0.5206
+    Test:  RMSE=20.0251, MAE=15.3416, R²=0.5990
+    Robustness: 75.94/100 (RMSE ratio: 0.65x)
+2026-04-25 01:18:04,741 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:18:04,741 - __main__ - WARNING - Model file not found: artifacts/models/all_except_bangalore_to_bangalore/random_forest/model.joblib
+2026-04-25 01:18:04,741 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:18:04,741 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:18:04,741 - __main__ - WARNING - Model file not found: artifacts/models/all_except_bangalore_to_bangalore/xgboost/model.joblib
+2026-04-25 01:18:04,741 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:18:04,741 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:18:04,742 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/all_except_bangalore_to_bangalore/lightgbm/model.joblib
+2026-04-25 01:18:04,743 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on all_except_bangalore_to_bangalore:
+    Train: RMSE=4.5631, MAE=3.3642, R²=0.9895
+    Test:  RMSE=11.2318, MAE=9.2300, R²=0.8739
+    Robustness: 63.20/100 (RMSE ratio: 2.46x)
+2026-04-25 01:18:04,744 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:18:04,754 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,754 - __main__ - ERROR - Failed to load model from artifacts/models/all_except_bangalore_to_bangalore/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,754 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:18:04,754 - __main__ - INFO - 
+✓ Scenario complete: 2 models evaluated
+2026-04-25 01:18:04,754 - __main__ - INFO - 
+============================================================
+2026-04-25 01:18:04,754 - __main__ - INFO - 📊 EVALUATING SCENARIO: full_multi_city_temporal
+2026-04-25 01:18:04,754 - __main__ - INFO - ============================================================
+2026-04-25 01:18:04,754 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: full_multi_city_temporal
+2026-04-25 01:18:04,754 - airpollution.multi_city_data - INFO -    Description: Train on all 5 cities (80%), test on all 5 cities (20%) - temporal split
+2026-04-25 01:18:04,754 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'mumbai', 'bangalore', 'kolkata', 'hyderabad']
+2026-04-25 01:18:04,754 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:18:04,755 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,755 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:18:04,756 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,756 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:18:04,756 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:18:04,756 - airpollution.multi_city_data - INFO - ✓ Filtered 45 rows for kolkata (8.3% of total)
+2026-04-25 01:18:04,757 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 45 → 45 rows (100.0% retained)
+2026-04-25 01:18:04,757 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:18:04,758 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:18:04,758 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 396 rows
+2026-04-25 01:18:04,758 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi', 'mumbai', 'bangalore', 'kolkata', 'hyderabad']
+2026-04-25 01:18:04,758 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:18:04,758 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,759 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:18:04,759 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:18:04,759 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:18:04,760 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:18:04,760 - airpollution.multi_city_data - INFO - ✓ Filtered 45 rows for kolkata (8.3% of total)
+2026-04-25 01:18:04,760 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 45 → 45 rows (100.0% retained)
+2026-04-25 01:18:04,761 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:18:04,761 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:18:04,761 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 396 rows
+2026-04-25 01:18:04,761 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:18:04,761 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:18:04,762 - airpollution.multi_city_data - INFO - ✓ Scenario 'full_multi_city_temporal' split complete:
+    Train: 316 samples
+    Test:  80 samples
+2026-04-25 01:18:04,762 - __main__ - INFO - Data: 316 train samples, 80 test samples
+2026-04-25 01:18:04,762 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:18:04,762 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/full_multi_city_temporal/linear_regression/model.joblib
+2026-04-25 01:18:04,763 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on full_multi_city_temporal:
+    Train: RMSE=28.0189, MAE=22.2786, R²=0.5854
+    Test:  RMSE=34.5027, MAE=23.5386, R²=0.4823
+    Robustness: 59.68/100 (RMSE ratio: 1.23x)
+2026-04-25 01:18:04,763 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:18:04,763 - __main__ - WARNING - Model file not found: artifacts/models/full_multi_city_temporal/random_forest/model.joblib
+2026-04-25 01:18:04,763 - __main__ - WARNING -     ⚠ Skipping random_forest (model not found)
+2026-04-25 01:18:04,763 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:18:04,763 - __main__ - WARNING - Model file not found: artifacts/models/full_multi_city_temporal/xgboost/model.joblib
+2026-04-25 01:18:04,763 - __main__ - WARNING -     ⚠ Skipping xgboost (model not found)
+2026-04-25 01:18:04,763 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:18:04,763 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/full_multi_city_temporal/lightgbm/model.joblib
+2026-04-25 01:18:04,765 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on full_multi_city_temporal:
+    Train: RMSE=3.8880, MAE=2.7889, R²=0.9920
+    Test:  RMSE=37.7827, MAE=26.3493, R²=0.3792
+    Robustness: 22.75/100 (RMSE ratio: 9.72x)
+2026-04-25 01:18:04,765 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:18:04,775 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,775 - __main__ - ERROR - Failed to load model from artifacts/models/full_multi_city_temporal/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:18:04,775 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:18:04,775 - __main__ - INFO - 
+✓ Scenario complete: 2 models evaluated
+2026-04-25 01:18:04,775 - __main__ - INFO - 
+============================================================
+2026-04-25 01:18:04,775 - __main__ - INFO - ✓ EVALUATION PIPELINE COMPLETE
+2026-04-25 01:18:04,775 - __main__ - INFO - ============================================================
+2026-04-25 01:18:04,776 - __main__ - INFO - ✓ Evaluated scenarios: 7
+2026-04-25 01:18:04,776 - __main__ - INFO - ✓ Total evaluations: 14
+2026-04-25 01:18:04,776 - __main__ - INFO - 
+============================================================
+2026-04-25 01:18:04,776 - __main__ - INFO - 📋 GENERATING REPORTS
+2026-04-25 01:18:04,776 - __main__ - INFO - ============================================================
+2026-04-25 01:18:04,790 - __main__ - INFO - ✓ Markdown report saved: artifacts/metrics/COMPARISON_REPORT.md
+2026-04-25 01:18:04,792 - __main__ - INFO - ✓ JSON report saved: artifacts/metrics/comparison_results.json
+2026-04-25 01:18:04,792 - __main__ - INFO - ✓ Results CSV saved: artifacts/metrics/all_results.csv
+2026-04-25 01:18:04,793 - __main__ - INFO - 
+============================================================
+2026-04-25 01:18:04,793 - __main__ - INFO - ✓ ALL REPORTS GENERATED
+2026-04-25 01:18:04,793 - __main__ - INFO - ============================================================
+2026-04-25 01:18:04,793 - __main__ - INFO - ✓ All evaluation complete!
+2026-04-25 01:35:12,771 - airpollution.multi_city_data - INFO - ✓ Loaded configuration from configs/base.yaml
+2026-04-25 01:35:12,771 - airpollution.cities - INFO - ✓ Loaded city config: delhi (National Capital Territory of Delhi)
+2026-04-25 01:35:12,771 - airpollution.cities - INFO - ✓ Loaded city config: mumbai (Mumbai (Bombay))
+2026-04-25 01:35:12,771 - airpollution.cities - INFO - ✓ Loaded city config: bangalore (Bangalore (Bengaluru))
+2026-04-25 01:35:12,771 - airpollution.cities - INFO - ✓ Loaded city config: kolkata (Kolkata (Calcutta))
+2026-04-25 01:35:12,771 - airpollution.cities - INFO - ✓ Loaded city config: hyderabad (Hyderabad)
+2026-04-25 01:35:12,771 - airpollution.multi_city_data - INFO - ✓ Initialized MultiCityDataLoader with CSV: data/processed/unified_dataset.csv
+2026-04-25 01:35:12,771 - __main__ - INFO - ✓ Initialized EvaluationOrchestrator
+2026-04-25 01:35:12,772 - __main__ - INFO -   Config: configs/base.yaml
+2026-04-25 01:35:12,772 - __main__ - INFO -   Model dir: artifacts/models
+2026-04-25 01:35:12,772 - __main__ - INFO -   Metrics dir: artifacts/metrics
+2026-04-25 01:35:12,772 - __main__ - INFO - 
+============================================================
+2026-04-25 01:35:12,772 - __main__ - INFO - 🚀 STARTING EVALUATION PIPELINE
+2026-04-25 01:35:12,772 - __main__ - INFO - ============================================================
+2026-04-25 01:35:12,772 - __main__ - INFO - Scenarios to evaluate: 7
+2026-04-25 01:35:12,772 - __main__ - INFO - 
+============================================================
+2026-04-25 01:35:12,772 - __main__ - INFO - 📊 EVALUATING SCENARIO: delhi_standalone
+2026-04-25 01:35:12,772 - __main__ - INFO - ============================================================
+2026-04-25 01:35:12,772 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: delhi_standalone
+2026-04-25 01:35:12,772 - airpollution.multi_city_data - INFO -    Description: Train and test on Delhi only (baseline robustness: 1.0)
+2026-04-25 01:35:12,772 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi']
+2026-04-25 01:35:12,772 - airpollution.multi_city_data - INFO - Loading raw data from data/processed/unified_dataset.csv...
+2026-04-25 01:35:12,774 - airpollution.multi_city_data - INFO - ✓ Loaded 540 rows with 9 columns
+2026-04-25 01:35:12,774 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:35:12,775 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:12,775 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:35:12,775 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi']
+2026-04-25 01:35:12,776 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:35:12,776 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:12,776 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:35:12,776 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:35:12,776 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:35:12,777 - airpollution.multi_city_data - INFO - ✓ Scenario 'delhi_standalone' split complete:
+    Train: 96 samples
+    Test:  24 samples
+2026-04-25 01:35:12,777 - __main__ - INFO - Data: 96 train samples, 24 test samples
+2026-04-25 01:35:12,777 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:35:12,777 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/delhi_standalone/linear_regression/model.joblib
+2026-04-25 01:35:12,778 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on delhi_standalone:
+    Train: RMSE=35.6044, MAE=29.9927, R²=0.3160
+    Test:  RMSE=52.6826, MAE=40.9018, R²=0.2872
+    Robustness: 38.04/100 (RMSE ratio: 1.48x)
+2026-04-25 01:35:12,778 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:35:12,785 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/delhi_standalone/random_forest/model.joblib
+2026-04-25 01:35:12,815 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on delhi_standalone:
+    Train: RMSE=14.6834, MAE=11.8631, R²=0.8837
+    Test:  RMSE=56.4941, MAE=40.9002, R²=0.1803
+    Robustness: 10.82/100 (RMSE ratio: 3.85x)
+2026-04-25 01:35:12,815 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:35:12,819 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/delhi_standalone/xgboost/model.joblib
+2026-04-25 01:35:12,821 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on delhi_standalone:
+    Train: RMSE=0.0010, MAE=0.0007, R²=1.0000
+    Test:  RMSE=53.0821, MAE=39.5169, R²=0.2763
+    Robustness: 16.58/100 (RMSE ratio: 52881.33x)
+2026-04-25 01:35:12,822 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:35:12,822 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/delhi_standalone/lightgbm/model.joblib
+2026-04-25 01:35:12,824 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on delhi_standalone:
+    Train: RMSE=16.6697, MAE=13.8205, R²=0.8501
+    Test:  RMSE=57.4263, MAE=43.7435, R²=0.1530
+    Robustness: 9.18/100 (RMSE ratio: 3.44x)
+2026-04-25 01:35:12,824 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:35:12,850 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:12,850 - __main__ - ERROR - Failed to load model from artifacts/models/delhi_standalone/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:12,850 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:35:12,850 - __main__ - INFO - 
+✓ Scenario complete: 4 models evaluated
+2026-04-25 01:35:12,850 - __main__ - INFO - 
+============================================================
+2026-04-25 01:35:12,850 - __main__ - INFO - 📊 EVALUATING SCENARIO: mumbai_standalone
+2026-04-25 01:35:12,850 - __main__ - INFO - ============================================================
+2026-04-25 01:35:12,850 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: mumbai_standalone
+2026-04-25 01:35:12,850 - airpollution.multi_city_data - INFO -    Description: Train and test on Mumbai only
+2026-04-25 01:35:12,850 - airpollution.multi_city_data - INFO -    Loading training cities: ['mumbai']
+2026-04-25 01:35:12,850 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:35:12,851 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:12,851 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:35:12,851 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:35:12,852 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:35:12,852 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:12,852 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:35:12,852 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:35:12,852 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:35:12,852 - airpollution.multi_city_data - INFO - ✓ Scenario 'mumbai_standalone' split complete:
+    Train: 96 samples
+    Test:  24 samples
+2026-04-25 01:35:12,852 - __main__ - INFO - Data: 96 train samples, 24 test samples
+2026-04-25 01:35:12,852 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:35:12,853 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/mumbai_standalone/linear_regression/model.joblib
+2026-04-25 01:35:12,854 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on mumbai_standalone:
+    Train: RMSE=22.2527, MAE=18.7454, R²=0.5165
+    Test:  RMSE=32.9266, MAE=25.5636, R²=0.4501
+    Robustness: 47.82/100 (RMSE ratio: 1.48x)
+2026-04-25 01:35:12,854 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:35:12,861 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/mumbai_standalone/random_forest/model.joblib
+2026-04-25 01:35:12,888 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on mumbai_standalone:
+    Train: RMSE=9.2907, MAE=7.2218, R²=0.9157
+    Test:  RMSE=36.1348, MAE=27.2825, R²=0.3378
+    Robustness: 20.27/100 (RMSE ratio: 3.89x)
+2026-04-25 01:35:12,889 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:35:12,891 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/mumbai_standalone/xgboost/model.joblib
+2026-04-25 01:35:12,892 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on mumbai_standalone:
+    Train: RMSE=0.0007, MAE=0.0004, R²=1.0000
+    Test:  RMSE=34.9270, MAE=25.8267, R²=0.3813
+    Robustness: 22.88/100 (RMSE ratio: 52167.01x)
+2026-04-25 01:35:12,893 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:35:12,893 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/mumbai_standalone/lightgbm/model.joblib
+2026-04-25 01:35:12,895 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on mumbai_standalone:
+    Train: RMSE=10.4349, MAE=8.6803, R²=0.8937
+    Test:  RMSE=36.2749, MAE=27.3849, R²=0.3326
+    Robustness: 19.96/100 (RMSE ratio: 3.48x)
+2026-04-25 01:35:12,895 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:35:12,906 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:12,906 - __main__ - ERROR - Failed to load model from artifacts/models/mumbai_standalone/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:12,906 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:35:12,906 - __main__ - INFO - 
+✓ Scenario complete: 4 models evaluated
+2026-04-25 01:35:12,906 - __main__ - INFO - 
+============================================================
+2026-04-25 01:35:12,906 - __main__ - INFO - 📊 EVALUATING SCENARIO: delhi_to_mumbai
+2026-04-25 01:35:12,906 - __main__ - INFO - ============================================================
+2026-04-25 01:35:12,906 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: delhi_to_mumbai
+2026-04-25 01:35:12,906 - airpollution.multi_city_data - INFO -    Description: Train on Delhi, test on completely unseen Mumbai (robustness test)
+2026-04-25 01:35:12,906 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi']
+2026-04-25 01:35:12,907 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:35:12,907 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:12,907 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:35:12,907 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:35:12,908 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:35:12,908 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:12,908 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:35:12,908 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:35:12,909 - airpollution.multi_city_data - INFO - ✓ Scenario 'delhi_to_mumbai' split complete:
+    Train: 120 samples
+    Test:  120 samples
+2026-04-25 01:35:12,909 - __main__ - INFO - Data: 120 train samples, 120 test samples
+2026-04-25 01:35:12,909 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:35:12,909 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/delhi_to_mumbai/linear_regression/model.joblib
+2026-04-25 01:35:12,910 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on delhi_to_mumbai:
+    Train: RMSE=39.1604, MAE=31.4396, R²=0.3223
+    Test:  RMSE=24.7923, MAE=20.0318, R²=0.4939
+    Robustness: 69.63/100 (RMSE ratio: 0.63x)
+2026-04-25 01:35:12,910 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:35:12,916 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/delhi_to_mumbai/random_forest/model.joblib
+2026-04-25 01:35:12,944 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on delhi_to_mumbai:
+    Train: RMSE=16.1698, MAE=12.8300, R²=0.8845
+    Test:  RMSE=39.1993, MAE=34.6748, R²=-0.2653
+    Robustness: 11.52/100 (RMSE ratio: 2.42x)
+2026-04-25 01:35:12,944 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:35:12,946 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/delhi_to_mumbai/xgboost/model.joblib
+2026-04-25 01:35:12,948 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on delhi_to_mumbai:
+    Train: RMSE=0.0015, MAE=0.0010, R²=1.0000
+    Test:  RMSE=42.9805, MAE=39.0042, R²=-0.5211
+    Robustness: 0.00/100 (RMSE ratio: 28673.84x)
+2026-04-25 01:35:12,948 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:35:12,949 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/delhi_to_mumbai/lightgbm/model.joblib
+2026-04-25 01:35:12,950 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on delhi_to_mumbai:
+    Train: RMSE=15.3861, MAE=12.4270, R²=0.8954
+    Test:  RMSE=25.8544, MAE=21.8136, R²=0.4496
+    Robustness: 53.37/100 (RMSE ratio: 1.68x)
+2026-04-25 01:35:12,950 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:35:12,961 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:12,961 - __main__ - ERROR - Failed to load model from artifacts/models/delhi_to_mumbai/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:12,961 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:35:12,961 - __main__ - INFO - 
+✓ Scenario complete: 4 models evaluated
+2026-04-25 01:35:12,961 - __main__ - INFO - 
+============================================================
+2026-04-25 01:35:12,961 - __main__ - INFO - 📊 EVALUATING SCENARIO: mumbai_to_delhi
+2026-04-25 01:35:12,961 - __main__ - INFO - ============================================================
+2026-04-25 01:35:12,961 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: mumbai_to_delhi
+2026-04-25 01:35:12,961 - airpollution.multi_city_data - INFO -    Description: Train on Mumbai, test on completely unseen Delhi
+2026-04-25 01:35:12,961 - airpollution.multi_city_data - INFO -    Loading training cities: ['mumbai']
+2026-04-25 01:35:12,962 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:35:12,962 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:12,962 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:35:12,962 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi']
+2026-04-25 01:35:12,963 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:35:12,963 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:12,963 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:35:12,963 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:35:12,963 - airpollution.multi_city_data - INFO - ✓ Scenario 'mumbai_to_delhi' split complete:
+    Train: 120 samples
+    Test:  120 samples
+2026-04-25 01:35:12,963 - __main__ - INFO - Data: 120 train samples, 120 test samples
+2026-04-25 01:35:12,963 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:35:12,964 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/mumbai_to_delhi/linear_regression/model.joblib
+2026-04-25 01:35:12,965 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on mumbai_to_delhi:
+    Train: RMSE=24.4753, MAE=19.6498, R²=0.5067
+    Test:  RMSE=41.4956, MAE=32.8585, R²=0.2391
+    Robustness: 40.44/100 (RMSE ratio: 1.70x)
+2026-04-25 01:35:12,965 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:35:12,971 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/mumbai_to_delhi/random_forest/model.joblib
+2026-04-25 01:35:12,998 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on mumbai_to_delhi:
+    Train: RMSE=10.1989, MAE=7.9349, R²=0.9144
+    Test:  RMSE=47.9582, MAE=40.0447, R²=-0.0163
+    Robustness: 0.00/100 (RMSE ratio: 4.70x)
+2026-04-25 01:35:12,999 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:35:13,000 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/mumbai_to_delhi/xgboost/model.joblib
+2026-04-25 01:35:13,002 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on mumbai_to_delhi:
+    Train: RMSE=0.0007, MAE=0.0005, R²=1.0000
+    Test:  RMSE=46.5369, MAE=38.7757, R²=0.0430
+    Robustness: 2.58/100 (RMSE ratio: 65558.97x)
+2026-04-25 01:35:13,002 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:35:13,003 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/mumbai_to_delhi/lightgbm/model.joblib
+2026-04-25 01:35:13,005 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on mumbai_to_delhi:
+    Train: RMSE=9.6849, MAE=7.8677, R²=0.9228
+    Test:  RMSE=44.4577, MAE=36.5656, R²=0.1266
+    Robustness: 7.60/100 (RMSE ratio: 4.59x)
+2026-04-25 01:35:13,005 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:35:13,015 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:13,015 - __main__ - ERROR - Failed to load model from artifacts/models/mumbai_to_delhi/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:13,015 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:35:13,015 - __main__ - INFO - 
+✓ Scenario complete: 4 models evaluated
+2026-04-25 01:35:13,016 - __main__ - INFO - 
+============================================================
+2026-04-25 01:35:13,016 - __main__ - INFO - 📊 EVALUATING SCENARIO: multi_city_to_mumbai
+2026-04-25 01:35:13,016 - __main__ - INFO - ============================================================
+2026-04-25 01:35:13,016 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: multi_city_to_mumbai
+2026-04-25 01:35:13,016 - airpollution.multi_city_data - INFO -    Description: Train on Delhi+Bangalore+Hyderabad, test on isolated Mumbai
+2026-04-25 01:35:13,016 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'bangalore', 'hyderabad']
+2026-04-25 01:35:13,016 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:35:13,017 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:13,017 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:35:13,017 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:35:13,018 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:35:13,018 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:35:13,018 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 231 rows
+2026-04-25 01:35:13,018 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:35:13,018 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:35:13,019 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:13,019 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:35:13,019 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:35:13,019 - airpollution.multi_city_data - INFO - ✓ Scenario 'multi_city_to_mumbai' split complete:
+    Train: 231 samples
+    Test:  120 samples
+2026-04-25 01:35:13,019 - __main__ - INFO - Data: 231 train samples, 120 test samples
+2026-04-25 01:35:13,019 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:35:13,020 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/multi_city_to_mumbai/linear_regression/model.joblib
+2026-04-25 01:35:13,020 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on multi_city_to_mumbai:
+    Train: RMSE=31.5716, MAE=23.7517, R²=0.5881
+    Test:  RMSE=35.5718, MAE=30.2440, R²=-0.0419
+    Robustness: 34.93/100 (RMSE ratio: 1.13x)
+2026-04-25 01:35:13,021 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:35:13,028 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/multi_city_to_mumbai/random_forest/model.joblib
+2026-04-25 01:35:13,056 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on multi_city_to_mumbai:
+    Train: RMSE=12.6422, MAE=8.9161, R²=0.9340
+    Test:  RMSE=20.4484, MAE=16.5960, R²=0.6557
+    Robustness: 66.99/100 (RMSE ratio: 1.62x)
+2026-04-25 01:35:13,056 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:35:13,058 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/multi_city_to_mumbai/xgboost/model.joblib
+2026-04-25 01:35:13,060 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on multi_city_to_mumbai:
+    Train: RMSE=0.0234, MAE=0.0158, R²=1.0000
+    Test:  RMSE=27.7836, MAE=21.3807, R²=0.3644
+    Robustness: 21.86/100 (RMSE ratio: 1189.34x)
+2026-04-25 01:35:13,060 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:35:13,061 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/multi_city_to_mumbai/lightgbm/model.joblib
+2026-04-25 01:35:13,063 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on multi_city_to_mumbai:
+    Train: RMSE=7.2729, MAE=5.2800, R²=0.9781
+    Test:  RMSE=15.4367, MAE=12.3352, R²=0.8038
+    Robustness: 65.78/100 (RMSE ratio: 2.12x)
+2026-04-25 01:35:13,063 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:35:13,073 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:13,074 - __main__ - ERROR - Failed to load model from artifacts/models/multi_city_to_mumbai/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:13,074 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:35:13,074 - __main__ - INFO - 
+✓ Scenario complete: 4 models evaluated
+2026-04-25 01:35:13,074 - __main__ - INFO - 
+============================================================
+2026-04-25 01:35:13,074 - __main__ - INFO - 📊 EVALUATING SCENARIO: all_except_bangalore_to_bangalore
+2026-04-25 01:35:13,074 - __main__ - INFO - ============================================================
+2026-04-25 01:35:13,074 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: all_except_bangalore_to_bangalore
+2026-04-25 01:35:13,074 - airpollution.multi_city_data - INFO -    Description: Train on 4 cities, test on isolated Bangalore
+2026-04-25 01:35:13,074 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'mumbai', 'kolkata', 'hyderabad']
+2026-04-25 01:35:13,074 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:35:13,075 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:13,075 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:35:13,076 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:13,076 - airpollution.multi_city_data - INFO - ✓ Filtered 45 rows for kolkata (8.3% of total)
+2026-04-25 01:35:13,076 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 45 → 45 rows (100.0% retained)
+2026-04-25 01:35:13,076 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:35:13,077 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:35:13,077 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 335 rows
+2026-04-25 01:35:13,077 - airpollution.multi_city_data - INFO -    Loading test cities: ['bangalore']
+2026-04-25 01:35:13,077 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:35:13,078 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:35:13,078 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 61 rows
+2026-04-25 01:35:13,078 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:35:13,078 - airpollution.multi_city_data - INFO - ✓ Scenario 'all_except_bangalore_to_bangalore' split complete:
+    Train: 335 samples
+    Test:  61 samples
+2026-04-25 01:35:13,078 - __main__ - INFO - Data: 335 train samples, 61 test samples
+2026-04-25 01:35:13,078 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:35:13,078 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/all_except_bangalore_to_bangalore/linear_regression/model.joblib
+2026-04-25 01:35:13,079 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on all_except_bangalore_to_bangalore:
+    Train: RMSE=30.8246, MAE=23.7850, R²=0.5206
+    Test:  RMSE=20.0251, MAE=15.3416, R²=0.5990
+    Robustness: 75.94/100 (RMSE ratio: 0.65x)
+2026-04-25 01:35:13,080 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:35:13,087 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/all_except_bangalore_to_bangalore/random_forest/model.joblib
+2026-04-25 01:35:13,115 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on all_except_bangalore_to_bangalore:
+    Train: RMSE=11.3683, MAE=8.7300, R²=0.9348
+    Test:  RMSE=14.3235, MAE=11.5828, R²=0.7949
+    Robustness: 77.29/100 (RMSE ratio: 1.26x)
+2026-04-25 01:35:13,115 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:35:13,117 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/all_except_bangalore_to_bangalore/xgboost/model.joblib
+2026-04-25 01:35:13,119 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on all_except_bangalore_to_bangalore:
+    Train: RMSE=0.0904, MAE=0.0620, R²=1.0000
+    Test:  RMSE=13.4544, MAE=12.0054, R²=0.8190
+    Robustness: 49.14/100 (RMSE ratio: 148.89x)
+2026-04-25 01:35:13,119 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:35:13,120 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/all_except_bangalore_to_bangalore/lightgbm/model.joblib
+2026-04-25 01:35:13,122 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on all_except_bangalore_to_bangalore:
+    Train: RMSE=4.5631, MAE=3.3642, R²=0.9895
+    Test:  RMSE=11.2318, MAE=9.2300, R²=0.8739
+    Robustness: 63.20/100 (RMSE ratio: 2.46x)
+2026-04-25 01:35:13,122 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:35:13,133 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:13,133 - __main__ - ERROR - Failed to load model from artifacts/models/all_except_bangalore_to_bangalore/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:13,133 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:35:13,133 - __main__ - INFO - 
+✓ Scenario complete: 4 models evaluated
+2026-04-25 01:35:13,133 - __main__ - INFO - 
+============================================================
+2026-04-25 01:35:13,133 - __main__ - INFO - 📊 EVALUATING SCENARIO: full_multi_city_temporal
+2026-04-25 01:35:13,133 - __main__ - INFO - ============================================================
+2026-04-25 01:35:13,133 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: full_multi_city_temporal
+2026-04-25 01:35:13,133 - airpollution.multi_city_data - INFO -    Description: Train on all 5 cities (80%), test on all 5 cities (20%) - temporal split
+2026-04-25 01:35:13,133 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'mumbai', 'bangalore', 'kolkata', 'hyderabad']
+2026-04-25 01:35:13,133 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:35:13,134 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:13,134 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:35:13,135 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:13,135 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:35:13,135 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:35:13,136 - airpollution.multi_city_data - INFO - ✓ Filtered 45 rows for kolkata (8.3% of total)
+2026-04-25 01:35:13,136 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 45 → 45 rows (100.0% retained)
+2026-04-25 01:35:13,136 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:35:13,137 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:35:13,137 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 396 rows
+2026-04-25 01:35:13,137 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi', 'mumbai', 'bangalore', 'kolkata', 'hyderabad']
+2026-04-25 01:35:13,137 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:35:13,138 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:13,138 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:35:13,138 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:35:13,138 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:35:13,139 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:35:13,139 - airpollution.multi_city_data - INFO - ✓ Filtered 45 rows for kolkata (8.3% of total)
+2026-04-25 01:35:13,140 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 45 → 45 rows (100.0% retained)
+2026-04-25 01:35:13,140 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:35:13,140 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:35:13,140 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 396 rows
+2026-04-25 01:35:13,140 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:35:13,140 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:35:13,141 - airpollution.multi_city_data - INFO - ✓ Scenario 'full_multi_city_temporal' split complete:
+    Train: 316 samples
+    Test:  80 samples
+2026-04-25 01:35:13,141 - __main__ - INFO - Data: 316 train samples, 80 test samples
+2026-04-25 01:35:13,141 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:35:13,141 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/full_multi_city_temporal/linear_regression/model.joblib
+2026-04-25 01:35:13,142 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on full_multi_city_temporal:
+    Train: RMSE=28.0189, MAE=22.2786, R²=0.5854
+    Test:  RMSE=34.5027, MAE=23.5386, R²=0.4823
+    Robustness: 59.68/100 (RMSE ratio: 1.23x)
+2026-04-25 01:35:13,142 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:35:13,149 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/full_multi_city_temporal/random_forest/model.joblib
+2026-04-25 01:35:13,176 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on full_multi_city_temporal:
+    Train: RMSE=9.8183, MAE=7.3970, R²=0.9491
+    Test:  RMSE=37.7619, MAE=25.2572, R²=0.3798
+    Robustness: 22.79/100 (RMSE ratio: 3.85x)
+2026-04-25 01:35:13,176 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:35:13,178 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/full_multi_city_temporal/xgboost/model.joblib
+2026-04-25 01:35:13,180 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on full_multi_city_temporal:
+    Train: RMSE=0.0550, MAE=0.0394, R²=1.0000
+    Test:  RMSE=40.2198, MAE=28.0097, R²=0.2965
+    Robustness: 17.79/100 (RMSE ratio: 731.64x)
+2026-04-25 01:35:13,180 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:35:13,181 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/full_multi_city_temporal/lightgbm/model.joblib
+2026-04-25 01:35:13,183 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on full_multi_city_temporal:
+    Train: RMSE=3.8880, MAE=2.7889, R²=0.9920
+    Test:  RMSE=37.7827, MAE=26.3493, R²=0.3792
+    Robustness: 22.75/100 (RMSE ratio: 9.72x)
+2026-04-25 01:35:13,183 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:35:13,194 - airpollution.models.factory - ERROR - ✗ Failed to load Neural Network: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:13,194 - __main__ - ERROR - Failed to load model from artifacts/models/full_multi_city_temporal/neural_network/model.joblib: Load failed: Could not deserialize 'keras.metrics.mse' because it is not a KerasSaveable subclass
+2026-04-25 01:35:13,194 - __main__ - WARNING -     ⚠ Skipping neural_network (model not found)
+2026-04-25 01:35:13,194 - __main__ - INFO - 
+✓ Scenario complete: 4 models evaluated
+2026-04-25 01:35:13,194 - __main__ - INFO - 
+============================================================
+2026-04-25 01:35:13,194 - __main__ - INFO - ✓ EVALUATION PIPELINE COMPLETE
+2026-04-25 01:35:13,194 - __main__ - INFO - ============================================================
+2026-04-25 01:35:13,194 - __main__ - INFO - ✓ Evaluated scenarios: 7
+2026-04-25 01:35:13,194 - __main__ - INFO - ✓ Total evaluations: 28
+2026-04-25 01:35:13,194 - __main__ - INFO - 
+============================================================
+2026-04-25 01:35:13,194 - __main__ - INFO - 📋 GENERATING REPORTS
+2026-04-25 01:35:13,194 - __main__ - INFO - ============================================================
+2026-04-25 01:35:13,215 - __main__ - INFO - ✓ Markdown report saved: artifacts/metrics/COMPARISON_REPORT.md
+2026-04-25 01:35:13,217 - __main__ - INFO - ✓ JSON report saved: artifacts/metrics/comparison_results.json
+2026-04-25 01:35:13,218 - __main__ - INFO - ✓ Results CSV saved: artifacts/metrics/all_results.csv
+2026-04-25 01:35:13,218 - __main__ - INFO - 
+============================================================
+2026-04-25 01:35:13,218 - __main__ - INFO - ✓ ALL REPORTS GENERATED
+2026-04-25 01:35:13,218 - __main__ - INFO - ============================================================
+2026-04-25 01:35:13,218 - __main__ - INFO - ✓ All evaluation complete!
+2026-04-25 01:43:13,513 - airpollution.multi_city_data - INFO - ✓ Loaded configuration from configs/base.yaml
+2026-04-25 01:43:13,513 - airpollution.cities - INFO - ✓ Loaded city config: delhi (National Capital Territory of Delhi)
+2026-04-25 01:43:13,513 - airpollution.cities - INFO - ✓ Loaded city config: mumbai (Mumbai (Bombay))
+2026-04-25 01:43:13,513 - airpollution.cities - INFO - ✓ Loaded city config: bangalore (Bangalore (Bengaluru))
+2026-04-25 01:43:13,513 - airpollution.cities - INFO - ✓ Loaded city config: kolkata (Kolkata (Calcutta))
+2026-04-25 01:43:13,514 - airpollution.cities - INFO - ✓ Loaded city config: hyderabad (Hyderabad)
+2026-04-25 01:43:13,514 - airpollution.multi_city_data - INFO - ✓ Initialized MultiCityDataLoader with CSV: data/processed/unified_dataset.csv
+2026-04-25 01:43:13,514 - __main__ - INFO - ✓ Initialized EvaluationOrchestrator
+2026-04-25 01:43:13,514 - __main__ - INFO -   Config: configs/base.yaml
+2026-04-25 01:43:13,514 - __main__ - INFO -   Model dir: artifacts/models
+2026-04-25 01:43:13,514 - __main__ - INFO -   Metrics dir: artifacts/metrics
+2026-04-25 01:43:13,514 - __main__ - INFO - 
+============================================================
+2026-04-25 01:43:13,514 - __main__ - INFO - 🚀 STARTING EVALUATION PIPELINE
+2026-04-25 01:43:13,514 - __main__ - INFO - ============================================================
+2026-04-25 01:43:13,514 - __main__ - INFO - Scenarios to evaluate: 7
+2026-04-25 01:43:13,514 - __main__ - INFO - 
+============================================================
+2026-04-25 01:43:13,514 - __main__ - INFO - 📊 EVALUATING SCENARIO: delhi_standalone
+2026-04-25 01:43:13,514 - __main__ - INFO - ============================================================
+2026-04-25 01:43:13,514 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: delhi_standalone
+2026-04-25 01:43:13,514 - airpollution.multi_city_data - INFO -    Description: Train and test on Delhi only (baseline robustness: 1.0)
+2026-04-25 01:43:13,514 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi']
+2026-04-25 01:43:13,514 - airpollution.multi_city_data - INFO - Loading raw data from data/processed/unified_dataset.csv...
+2026-04-25 01:43:13,516 - airpollution.multi_city_data - INFO - ✓ Loaded 540 rows with 9 columns
+2026-04-25 01:43:13,517 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:43:13,518 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:13,518 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:43:13,518 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi']
+2026-04-25 01:43:13,518 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:43:13,519 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:13,519 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:43:13,519 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:43:13,519 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:43:13,519 - airpollution.multi_city_data - INFO - ✓ Scenario 'delhi_standalone' split complete:
+    Train: 96 samples
+    Test:  24 samples
+2026-04-25 01:43:13,519 - __main__ - INFO - Data: 96 train samples, 24 test samples
+2026-04-25 01:43:13,519 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:43:13,520 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/delhi_standalone/linear_regression/model.joblib
+2026-04-25 01:43:13,521 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on delhi_standalone:
+    Train: RMSE=35.6044, MAE=29.9927, R²=0.3160
+    Test:  RMSE=52.6826, MAE=40.9018, R²=0.2872
+    Robustness: 38.04/100 (RMSE ratio: 1.48x)
+2026-04-25 01:43:13,521 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:43:13,527 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/delhi_standalone/random_forest/model.joblib
+2026-04-25 01:43:13,561 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on delhi_standalone:
+    Train: RMSE=14.6834, MAE=11.8631, R²=0.8837
+    Test:  RMSE=56.4941, MAE=40.9002, R²=0.1803
+    Robustness: 10.82/100 (RMSE ratio: 3.85x)
+2026-04-25 01:43:13,561 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:43:13,565 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/delhi_standalone/xgboost/model.joblib
+2026-04-25 01:43:13,568 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on delhi_standalone:
+    Train: RMSE=0.0010, MAE=0.0007, R²=1.0000
+    Test:  RMSE=53.0821, MAE=39.5169, R²=0.2763
+    Robustness: 16.58/100 (RMSE ratio: 52881.33x)
+2026-04-25 01:43:13,568 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:43:13,569 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/delhi_standalone/lightgbm/model.joblib
+2026-04-25 01:43:13,571 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on delhi_standalone:
+    Train: RMSE=16.6697, MAE=13.8205, R²=0.8501
+    Test:  RMSE=57.4263, MAE=43.7435, R²=0.1530
+    Robustness: 9.18/100 (RMSE ratio: 3.44x)
+2026-04-25 01:43:13,571 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:43:13,594 - airpollution.models.factory - INFO - ✓ Neural Network loaded from artifacts/models/delhi_standalone/neural_network/model.h5
+2026-04-25 01:43:13,668 - airpollution.evaluators - INFO - ✓ Evaluated neural_network on delhi_standalone:
+    Train: RMSE=57.9271, MAE=47.6081, R²=-0.8105
+    Test:  RMSE=78.7090, MAE=67.9602, R²=-0.5911
+    Robustness: 25.65/100 (RMSE ratio: 1.36x)
+2026-04-25 01:43:13,668 - __main__ - INFO - 
+✓ Scenario complete: 5 models evaluated
+2026-04-25 01:43:13,668 - __main__ - INFO - 
+============================================================
+2026-04-25 01:43:13,668 - __main__ - INFO - 📊 EVALUATING SCENARIO: mumbai_standalone
+2026-04-25 01:43:13,668 - __main__ - INFO - ============================================================
+2026-04-25 01:43:13,668 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: mumbai_standalone
+2026-04-25 01:43:13,668 - airpollution.multi_city_data - INFO -    Description: Train and test on Mumbai only
+2026-04-25 01:43:13,668 - airpollution.multi_city_data - INFO -    Loading training cities: ['mumbai']
+2026-04-25 01:43:13,668 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:43:13,669 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:13,669 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:43:13,669 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:43:13,670 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:43:13,670 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:13,670 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:43:13,670 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:43:13,670 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:43:13,671 - airpollution.multi_city_data - INFO - ✓ Scenario 'mumbai_standalone' split complete:
+    Train: 96 samples
+    Test:  24 samples
+2026-04-25 01:43:13,671 - __main__ - INFO - Data: 96 train samples, 24 test samples
+2026-04-25 01:43:13,671 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:43:13,671 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/mumbai_standalone/linear_regression/model.joblib
+2026-04-25 01:43:13,672 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on mumbai_standalone:
+    Train: RMSE=22.2527, MAE=18.7454, R²=0.5165
+    Test:  RMSE=32.9266, MAE=25.5636, R²=0.4501
+    Robustness: 47.82/100 (RMSE ratio: 1.48x)
+2026-04-25 01:43:13,672 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:43:13,678 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/mumbai_standalone/random_forest/model.joblib
+2026-04-25 01:43:13,705 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on mumbai_standalone:
+    Train: RMSE=9.2907, MAE=7.2218, R²=0.9157
+    Test:  RMSE=36.1348, MAE=27.2825, R²=0.3378
+    Robustness: 20.27/100 (RMSE ratio: 3.89x)
+2026-04-25 01:43:13,705 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:43:13,707 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/mumbai_standalone/xgboost/model.joblib
+2026-04-25 01:43:13,709 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on mumbai_standalone:
+    Train: RMSE=0.0007, MAE=0.0004, R²=1.0000
+    Test:  RMSE=34.9270, MAE=25.8267, R²=0.3813
+    Robustness: 22.88/100 (RMSE ratio: 52167.01x)
+2026-04-25 01:43:13,709 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:43:13,710 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/mumbai_standalone/lightgbm/model.joblib
+2026-04-25 01:43:13,712 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on mumbai_standalone:
+    Train: RMSE=10.4349, MAE=8.6803, R²=0.8937
+    Test:  RMSE=36.2749, MAE=27.3849, R²=0.3326
+    Robustness: 19.96/100 (RMSE ratio: 3.48x)
+2026-04-25 01:43:13,712 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:43:13,722 - airpollution.models.factory - INFO - ✓ Neural Network loaded from artifacts/models/mumbai_standalone/neural_network/model.h5
+2026-04-25 01:43:13,782 - airpollution.evaluators - INFO - ✓ Evaluated neural_network on mumbai_standalone:
+    Train: RMSE=59.4236, MAE=51.1838, R²=-2.4479
+    Test:  RMSE=51.0456, MAE=41.5377, R²=-0.3215
+    Robustness: 40.00/100 (RMSE ratio: 0.86x)
+2026-04-25 01:43:13,782 - __main__ - INFO - 
+✓ Scenario complete: 5 models evaluated
+2026-04-25 01:43:13,782 - __main__ - INFO - 
+============================================================
+2026-04-25 01:43:13,782 - __main__ - INFO - 📊 EVALUATING SCENARIO: delhi_to_mumbai
+2026-04-25 01:43:13,782 - __main__ - INFO - ============================================================
+2026-04-25 01:43:13,782 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: delhi_to_mumbai
+2026-04-25 01:43:13,782 - airpollution.multi_city_data - INFO -    Description: Train on Delhi, test on completely unseen Mumbai (robustness test)
+2026-04-25 01:43:13,782 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi']
+2026-04-25 01:43:13,783 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:43:13,783 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:13,784 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:43:13,784 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:43:13,784 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:43:13,784 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:13,784 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:43:13,784 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:43:13,785 - airpollution.multi_city_data - INFO - ✓ Scenario 'delhi_to_mumbai' split complete:
+    Train: 120 samples
+    Test:  120 samples
+2026-04-25 01:43:13,785 - __main__ - INFO - Data: 120 train samples, 120 test samples
+2026-04-25 01:43:13,785 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:43:13,785 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/delhi_to_mumbai/linear_regression/model.joblib
+2026-04-25 01:43:13,786 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on delhi_to_mumbai:
+    Train: RMSE=39.1604, MAE=31.4396, R²=0.3223
+    Test:  RMSE=24.7923, MAE=20.0318, R²=0.4939
+    Robustness: 69.63/100 (RMSE ratio: 0.63x)
+2026-04-25 01:43:13,786 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:43:13,793 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/delhi_to_mumbai/random_forest/model.joblib
+2026-04-25 01:43:13,821 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on delhi_to_mumbai:
+    Train: RMSE=16.1698, MAE=12.8300, R²=0.8845
+    Test:  RMSE=39.1993, MAE=34.6748, R²=-0.2653
+    Robustness: 11.52/100 (RMSE ratio: 2.42x)
+2026-04-25 01:43:13,821 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:43:13,823 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/delhi_to_mumbai/xgboost/model.joblib
+2026-04-25 01:43:13,826 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on delhi_to_mumbai:
+    Train: RMSE=0.0015, MAE=0.0010, R²=1.0000
+    Test:  RMSE=42.9805, MAE=39.0042, R²=-0.5211
+    Robustness: 0.00/100 (RMSE ratio: 28673.84x)
+2026-04-25 01:43:13,826 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:43:13,827 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/delhi_to_mumbai/lightgbm/model.joblib
+2026-04-25 01:43:13,828 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on delhi_to_mumbai:
+    Train: RMSE=15.3861, MAE=12.4270, R²=0.8954
+    Test:  RMSE=25.8544, MAE=21.8136, R²=0.4496
+    Robustness: 53.37/100 (RMSE ratio: 1.68x)
+2026-04-25 01:43:13,828 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:43:13,839 - airpollution.models.factory - INFO - ✓ Neural Network loaded from artifacts/models/delhi_to_mumbai/neural_network/model.h5
+2026-04-25 01:43:13,867 - tensorflow - WARNING - 5 out of the last 9 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x12fecf4c0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2026-04-25 01:43:13,878 - tensorflow - WARNING - 6 out of the last 12 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x12fecf4c0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2026-04-25 01:43:13,907 - airpollution.evaluators - INFO - ✓ Evaluated neural_network on delhi_to_mumbai:
+    Train: RMSE=79.0867, MAE=67.9813, R²=-1.7639
+    Test:  RMSE=46.9707, MAE=38.0928, R²=-0.8167
+    Robustness: 40.00/100 (RMSE ratio: 0.59x)
+2026-04-25 01:43:13,907 - __main__ - INFO - 
+✓ Scenario complete: 5 models evaluated
+2026-04-25 01:43:13,907 - __main__ - INFO - 
+============================================================
+2026-04-25 01:43:13,907 - __main__ - INFO - 📊 EVALUATING SCENARIO: mumbai_to_delhi
+2026-04-25 01:43:13,907 - __main__ - INFO - ============================================================
+2026-04-25 01:43:13,907 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: mumbai_to_delhi
+2026-04-25 01:43:13,908 - airpollution.multi_city_data - INFO -    Description: Train on Mumbai, test on completely unseen Delhi
+2026-04-25 01:43:13,908 - airpollution.multi_city_data - INFO -    Loading training cities: ['mumbai']
+2026-04-25 01:43:13,908 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:43:13,909 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:13,909 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 120 rows
+2026-04-25 01:43:13,909 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi']
+2026-04-25 01:43:13,909 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:43:13,909 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:13,909 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:43:13,909 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:43:13,910 - airpollution.multi_city_data - INFO - ✓ Scenario 'mumbai_to_delhi' split complete:
+    Train: 120 samples
+    Test:  120 samples
+2026-04-25 01:43:13,910 - __main__ - INFO - Data: 120 train samples, 120 test samples
+2026-04-25 01:43:13,910 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:43:13,910 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/mumbai_to_delhi/linear_regression/model.joblib
+2026-04-25 01:43:13,911 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on mumbai_to_delhi:
+    Train: RMSE=24.4753, MAE=19.6498, R²=0.5067
+    Test:  RMSE=41.4956, MAE=32.8585, R²=0.2391
+    Robustness: 40.44/100 (RMSE ratio: 1.70x)
+2026-04-25 01:43:13,911 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:43:13,917 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/mumbai_to_delhi/random_forest/model.joblib
+2026-04-25 01:43:13,943 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on mumbai_to_delhi:
+    Train: RMSE=10.1989, MAE=7.9349, R²=0.9144
+    Test:  RMSE=47.9582, MAE=40.0447, R²=-0.0163
+    Robustness: 0.00/100 (RMSE ratio: 4.70x)
+2026-04-25 01:43:13,943 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:43:13,945 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/mumbai_to_delhi/xgboost/model.joblib
+2026-04-25 01:43:13,947 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on mumbai_to_delhi:
+    Train: RMSE=0.0007, MAE=0.0005, R²=1.0000
+    Test:  RMSE=46.5369, MAE=38.7757, R²=0.0430
+    Robustness: 2.58/100 (RMSE ratio: 65558.97x)
+2026-04-25 01:43:13,947 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:43:13,948 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/mumbai_to_delhi/lightgbm/model.joblib
+2026-04-25 01:43:13,950 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on mumbai_to_delhi:
+    Train: RMSE=9.6849, MAE=7.8677, R²=0.9228
+    Test:  RMSE=44.4577, MAE=36.5656, R²=0.1266
+    Robustness: 7.60/100 (RMSE ratio: 4.59x)
+2026-04-25 01:43:13,950 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:43:13,960 - airpollution.models.factory - INFO - ✓ Neural Network loaded from artifacts/models/mumbai_to_delhi/neural_network/model.h5
+2026-04-25 01:43:14,023 - airpollution.evaluators - INFO - ✓ Evaluated neural_network on mumbai_to_delhi:
+    Train: RMSE=47.9768, MAE=38.9611, R²=-0.8953
+    Test:  RMSE=79.4914, MAE=67.9220, R²=-1.7923
+    Robustness: 26.86/100 (RMSE ratio: 1.66x)
+2026-04-25 01:43:14,023 - __main__ - INFO - 
+✓ Scenario complete: 5 models evaluated
+2026-04-25 01:43:14,023 - __main__ - INFO - 
+============================================================
+2026-04-25 01:43:14,023 - __main__ - INFO - 📊 EVALUATING SCENARIO: multi_city_to_mumbai
+2026-04-25 01:43:14,023 - __main__ - INFO - ============================================================
+2026-04-25 01:43:14,023 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: multi_city_to_mumbai
+2026-04-25 01:43:14,023 - airpollution.multi_city_data - INFO -    Description: Train on Delhi+Bangalore+Hyderabad, test on isolated Mumbai
+2026-04-25 01:43:14,023 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'bangalore', 'hyderabad']
+2026-04-25 01:43:14,024 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:43:14,025 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:14,025 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:43:14,025 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:43:14,026 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:43:14,026 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:43:14,026 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 231 rows
+2026-04-25 01:43:14,026 - airpollution.multi_city_data - INFO -    Loading test cities: ['mumbai']
+2026-04-25 01:43:14,026 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:43:14,027 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:14,027 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 120 rows
+2026-04-25 01:43:14,027 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:43:14,027 - airpollution.multi_city_data - INFO - ✓ Scenario 'multi_city_to_mumbai' split complete:
+    Train: 231 samples
+    Test:  120 samples
+2026-04-25 01:43:14,027 - __main__ - INFO - Data: 231 train samples, 120 test samples
+2026-04-25 01:43:14,027 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:43:14,027 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/multi_city_to_mumbai/linear_regression/model.joblib
+2026-04-25 01:43:14,028 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on multi_city_to_mumbai:
+    Train: RMSE=31.5716, MAE=23.7517, R²=0.5881
+    Test:  RMSE=35.5718, MAE=30.2440, R²=-0.0419
+    Robustness: 34.93/100 (RMSE ratio: 1.13x)
+2026-04-25 01:43:14,029 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:43:14,036 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/multi_city_to_mumbai/random_forest/model.joblib
+2026-04-25 01:43:14,062 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on multi_city_to_mumbai:
+    Train: RMSE=12.6422, MAE=8.9161, R²=0.9340
+    Test:  RMSE=20.4484, MAE=16.5960, R²=0.6557
+    Robustness: 66.99/100 (RMSE ratio: 1.62x)
+2026-04-25 01:43:14,062 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:43:14,064 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/multi_city_to_mumbai/xgboost/model.joblib
+2026-04-25 01:43:14,066 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on multi_city_to_mumbai:
+    Train: RMSE=0.0234, MAE=0.0158, R²=1.0000
+    Test:  RMSE=27.7836, MAE=21.3807, R²=0.3644
+    Robustness: 21.86/100 (RMSE ratio: 1189.34x)
+2026-04-25 01:43:14,066 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:43:14,067 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/multi_city_to_mumbai/lightgbm/model.joblib
+2026-04-25 01:43:14,069 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on multi_city_to_mumbai:
+    Train: RMSE=7.2729, MAE=5.2800, R²=0.9781
+    Test:  RMSE=15.4367, MAE=12.3352, R²=0.8038
+    Robustness: 65.78/100 (RMSE ratio: 2.12x)
+2026-04-25 01:43:14,069 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:43:14,082 - airpollution.models.factory - INFO - ✓ Neural Network loaded from artifacts/models/multi_city_to_mumbai/neural_network/model.h5
+2026-04-25 01:43:14,146 - airpollution.evaluators - INFO - ✓ Evaluated neural_network on multi_city_to_mumbai:
+    Train: RMSE=64.1363, MAE=51.7762, R²=-0.6997
+    Test:  RMSE=50.3930, MAE=43.1023, R²=-1.0910
+    Robustness: 40.00/100 (RMSE ratio: 0.79x)
+2026-04-25 01:43:14,146 - __main__ - INFO - 
+✓ Scenario complete: 5 models evaluated
+2026-04-25 01:43:14,146 - __main__ - INFO - 
+============================================================
+2026-04-25 01:43:14,147 - __main__ - INFO - 📊 EVALUATING SCENARIO: all_except_bangalore_to_bangalore
+2026-04-25 01:43:14,147 - __main__ - INFO - ============================================================
+2026-04-25 01:43:14,147 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: all_except_bangalore_to_bangalore
+2026-04-25 01:43:14,147 - airpollution.multi_city_data - INFO -    Description: Train on 4 cities, test on isolated Bangalore
+2026-04-25 01:43:14,147 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'mumbai', 'kolkata', 'hyderabad']
+2026-04-25 01:43:14,147 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:43:14,148 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:14,148 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:43:14,148 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:14,149 - airpollution.multi_city_data - INFO - ✓ Filtered 45 rows for kolkata (8.3% of total)
+2026-04-25 01:43:14,149 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 45 → 45 rows (100.0% retained)
+2026-04-25 01:43:14,149 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:43:14,150 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:43:14,150 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 335 rows
+2026-04-25 01:43:14,150 - airpollution.multi_city_data - INFO -    Loading test cities: ['bangalore']
+2026-04-25 01:43:14,150 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:43:14,151 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:43:14,151 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 61 rows
+2026-04-25 01:43:14,151 - airpollution.multi_city_data - INFO -    Using city-boundary split (all test cities are test set)
+2026-04-25 01:43:14,151 - airpollution.multi_city_data - INFO - ✓ Scenario 'all_except_bangalore_to_bangalore' split complete:
+    Train: 335 samples
+    Test:  61 samples
+2026-04-25 01:43:14,151 - __main__ - INFO - Data: 335 train samples, 61 test samples
+2026-04-25 01:43:14,151 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:43:14,151 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/all_except_bangalore_to_bangalore/linear_regression/model.joblib
+2026-04-25 01:43:14,152 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on all_except_bangalore_to_bangalore:
+    Train: RMSE=30.8246, MAE=23.7850, R²=0.5206
+    Test:  RMSE=20.0251, MAE=15.3416, R²=0.5990
+    Robustness: 75.94/100 (RMSE ratio: 0.65x)
+2026-04-25 01:43:14,152 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:43:14,160 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/all_except_bangalore_to_bangalore/random_forest/model.joblib
+2026-04-25 01:43:14,189 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on all_except_bangalore_to_bangalore:
+    Train: RMSE=11.3683, MAE=8.7300, R²=0.9348
+    Test:  RMSE=14.3235, MAE=11.5828, R²=0.7949
+    Robustness: 77.29/100 (RMSE ratio: 1.26x)
+2026-04-25 01:43:14,189 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:43:14,191 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/all_except_bangalore_to_bangalore/xgboost/model.joblib
+2026-04-25 01:43:14,193 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on all_except_bangalore_to_bangalore:
+    Train: RMSE=0.0904, MAE=0.0620, R²=1.0000
+    Test:  RMSE=13.4544, MAE=12.0054, R²=0.8190
+    Robustness: 49.14/100 (RMSE ratio: 148.89x)
+2026-04-25 01:43:14,193 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:43:14,194 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/all_except_bangalore_to_bangalore/lightgbm/model.joblib
+2026-04-25 01:43:14,196 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on all_except_bangalore_to_bangalore:
+    Train: RMSE=4.5631, MAE=3.3642, R²=0.9895
+    Test:  RMSE=11.2318, MAE=9.2300, R²=0.8739
+    Robustness: 63.20/100 (RMSE ratio: 2.46x)
+2026-04-25 01:43:14,196 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:43:14,207 - airpollution.models.factory - INFO - ✓ Neural Network loaded from artifacts/models/all_except_bangalore_to_bangalore/neural_network/model.h5
+2026-04-25 01:43:14,273 - airpollution.evaluators - INFO - ✓ Evaluated neural_network on all_except_bangalore_to_bangalore:
+    Train: RMSE=49.4053, MAE=38.9203, R²=-0.2317
+    Test:  RMSE=42.7748, MAE=31.7132, R²=-0.8295
+    Robustness: 40.00/100 (RMSE ratio: 0.87x)
+2026-04-25 01:43:14,273 - __main__ - INFO - 
+✓ Scenario complete: 5 models evaluated
+2026-04-25 01:43:14,273 - __main__ - INFO - 
+============================================================
+2026-04-25 01:43:14,273 - __main__ - INFO - 📊 EVALUATING SCENARIO: full_multi_city_temporal
+2026-04-25 01:43:14,273 - __main__ - INFO - ============================================================
+2026-04-25 01:43:14,273 - airpollution.multi_city_data - INFO - 🎯 Splitting data for scenario: full_multi_city_temporal
+2026-04-25 01:43:14,273 - airpollution.multi_city_data - INFO -    Description: Train on all 5 cities (80%), test on all 5 cities (20%) - temporal split
+2026-04-25 01:43:14,273 - airpollution.multi_city_data - INFO -    Loading training cities: ['delhi', 'mumbai', 'bangalore', 'kolkata', 'hyderabad']
+2026-04-25 01:43:14,274 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:43:14,274 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:14,275 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:43:14,275 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:14,275 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:43:14,276 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:43:14,276 - airpollution.multi_city_data - INFO - ✓ Filtered 45 rows for kolkata (8.3% of total)
+2026-04-25 01:43:14,276 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 45 → 45 rows (100.0% retained)
+2026-04-25 01:43:14,277 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:43:14,277 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:43:14,277 - airpollution.multi_city_data - INFO -    ✓ Combined training data: 396 rows
+2026-04-25 01:43:14,277 - airpollution.multi_city_data - INFO -    Loading test cities: ['delhi', 'mumbai', 'bangalore', 'kolkata', 'hyderabad']
+2026-04-25 01:43:14,277 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for delhi (22.2% of total)
+2026-04-25 01:43:14,278 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:14,278 - airpollution.multi_city_data - INFO - ✓ Filtered 120 rows for mumbai (22.2% of total)
+2026-04-25 01:43:14,279 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 120 → 120 rows (100.0% retained)
+2026-04-25 01:43:14,279 - airpollution.multi_city_data - INFO - ✓ Filtered 61 rows for bangalore (11.3% of total)
+2026-04-25 01:43:14,279 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 61 → 61 rows (100.0% retained)
+2026-04-25 01:43:14,279 - airpollution.multi_city_data - INFO - ✓ Filtered 45 rows for kolkata (8.3% of total)
+2026-04-25 01:43:14,280 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 45 → 45 rows (100.0% retained)
+2026-04-25 01:43:14,280 - airpollution.multi_city_data - INFO - ✓ Filtered 50 rows for hyderabad (9.3% of total)
+2026-04-25 01:43:14,281 - airpollution.multi_city_data - INFO - ✓ Preprocessed: 50 → 50 rows (100.0% retained)
+2026-04-25 01:43:14,281 - airpollution.multi_city_data - INFO -    ✓ Combined test data: 396 rows
+2026-04-25 01:43:14,281 - airpollution.multi_city_data - INFO -    Using temporal split (80/20)
+2026-04-25 01:43:14,281 - airpollution.multi_city_data - WARNING -    ⚠ No timestamp column; using day_of_year for temporal sort
+2026-04-25 01:43:14,281 - airpollution.multi_city_data - INFO - ✓ Scenario 'full_multi_city_temporal' split complete:
+    Train: 316 samples
+    Test:  80 samples
+2026-04-25 01:43:14,281 - __main__ - INFO - Data: 316 train samples, 80 test samples
+2026-04-25 01:43:14,281 - __main__ - INFO - 
+  🔍 Evaluating: linear_regression
+2026-04-25 01:43:14,282 - airpollution.models.factory - INFO - ✓ LinearRegression loaded from artifacts/models/full_multi_city_temporal/linear_regression/model.joblib
+2026-04-25 01:43:14,283 - airpollution.evaluators - INFO - ✓ Evaluated linear_regression on full_multi_city_temporal:
+    Train: RMSE=28.0189, MAE=22.2786, R²=0.5854
+    Test:  RMSE=34.5027, MAE=23.5386, R²=0.4823
+    Robustness: 59.68/100 (RMSE ratio: 1.23x)
+2026-04-25 01:43:14,283 - __main__ - INFO - 
+  🔍 Evaluating: random_forest
+2026-04-25 01:43:14,292 - airpollution.models.factory - INFO - ✓ RandomForest loaded from artifacts/models/full_multi_city_temporal/random_forest/model.joblib
+2026-04-25 01:43:14,320 - airpollution.evaluators - INFO - ✓ Evaluated random_forest on full_multi_city_temporal:
+    Train: RMSE=9.8183, MAE=7.3970, R²=0.9491
+    Test:  RMSE=37.7619, MAE=25.2572, R²=0.3798
+    Robustness: 22.79/100 (RMSE ratio: 3.85x)
+2026-04-25 01:43:14,320 - __main__ - INFO - 
+  🔍 Evaluating: xgboost
+2026-04-25 01:43:14,322 - airpollution.models.factory - INFO - ✓ XGBoost loaded from artifacts/models/full_multi_city_temporal/xgboost/model.joblib
+2026-04-25 01:43:14,324 - airpollution.evaluators - INFO - ✓ Evaluated xgboost on full_multi_city_temporal:
+    Train: RMSE=0.0550, MAE=0.0394, R²=1.0000
+    Test:  RMSE=40.2198, MAE=28.0097, R²=0.2965
+    Robustness: 17.79/100 (RMSE ratio: 731.64x)
+2026-04-25 01:43:14,324 - __main__ - INFO - 
+  🔍 Evaluating: lightgbm
+2026-04-25 01:43:14,326 - airpollution.models.factory - INFO - ✓ LightGBM loaded from artifacts/models/full_multi_city_temporal/lightgbm/model.joblib
+2026-04-25 01:43:14,328 - airpollution.evaluators - INFO - ✓ Evaluated lightgbm on full_multi_city_temporal:
+    Train: RMSE=3.8880, MAE=2.7889, R²=0.9920
+    Test:  RMSE=37.7827, MAE=26.3493, R²=0.3792
+    Robustness: 22.75/100 (RMSE ratio: 9.72x)
+2026-04-25 01:43:14,328 - __main__ - INFO - 
+  🔍 Evaluating: neural_network
+2026-04-25 01:43:14,338 - airpollution.models.factory - INFO - ✓ Neural Network loaded from artifacts/models/full_multi_city_temporal/neural_network/model.h5
+2026-04-25 01:43:14,402 - airpollution.evaluators - INFO - ✓ Evaluated neural_network on full_multi_city_temporal:
+    Train: RMSE=64.5748, MAE=54.3710, R²=-1.2019
+    Test:  RMSE=64.6544, MAE=51.5180, R²=-0.8180
+    Robustness: 39.95/100 (RMSE ratio: 1.00x)
+2026-04-25 01:43:14,403 - __main__ - INFO - 
+✓ Scenario complete: 5 models evaluated
+2026-04-25 01:43:14,403 - __main__ - INFO - 
+============================================================
+2026-04-25 01:43:14,403 - __main__ - INFO - ✓ EVALUATION PIPELINE COMPLETE
+2026-04-25 01:43:14,403 - __main__ - INFO - ============================================================
+2026-04-25 01:43:14,403 - __main__ - INFO - ✓ Evaluated scenarios: 7
+2026-04-25 01:43:14,403 - __main__ - INFO - ✓ Total evaluations: 35
+2026-04-25 01:43:14,403 - __main__ - INFO - 
+============================================================
+2026-04-25 01:43:14,403 - __main__ - INFO - 📋 GENERATING REPORTS
+2026-04-25 01:43:14,403 - __main__ - INFO - ============================================================
+2026-04-25 01:43:14,429 - __main__ - INFO - ✓ Markdown report saved: artifacts/metrics/COMPARISON_REPORT.md
+2026-04-25 01:43:14,432 - __main__ - INFO - ✓ JSON report saved: artifacts/metrics/comparison_results.json
+2026-04-25 01:43:14,434 - __main__ - INFO - ✓ Results CSV saved: artifacts/metrics/all_results.csv
+2026-04-25 01:43:14,434 - __main__ - INFO - 
+============================================================
+2026-04-25 01:43:14,434 - __main__ - INFO - ✓ ALL REPORTS GENERATED
+2026-04-25 01:43:14,434 - __main__ - INFO - ============================================================
+2026-04-25 01:43:14,434 - __main__ - INFO - ✓ All evaluation complete!

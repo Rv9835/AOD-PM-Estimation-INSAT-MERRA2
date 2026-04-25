@@ -1,0 +1,212 @@
+# Multi-City Air Pollution Prediction Pipeline Configuration
+# Updated: April 2026
+# Purpose: Comprehensive config supporting cross-city scenarios with robustness evaluation
+
+# =====================================================
+# DATA CONFIGURATION
+# =====================================================
+data:
+  # Split strategy: "cross_city" enables city-boundary isolation
+  split_strategy: "cross_city"
+  
+  # List of cities to include in the pipeline
+  cities_to_use:
+    - "delhi"
+    - "mumbai"
+    - "bangalore"
+    - "kolkata"
+    - "hyderabad"
+  
+  # Unified dataset path
+  unified_dataset_path: "data/processed/unified_dataset.csv"
+  
+  # Processed data output directory
+  processed_data_dir: "data/processed/"
+  
+  # Data validation
+  validation:
+    # Allowed columns in input CSV
+    required_columns:
+      - "lat"
+      - "lon"
+      - "pm25"
+      - "temperature"
+      - "humidity"
+      - "wind_speed"
+    
+    # NaN handling strategy
+    nan_strategy: "forward_fill_backward_fill"  # ffill then bfill
+    
+    # Drop rows with PM2.5 > this threshold (outlier removal)
+    pm25_max_threshold: 500
+    
+    # Drop rows with PM2.5 < this threshold
+    pm25_min_threshold: 0
+
+# =====================================================
+# TRAINING SCENARIOS (Cross-City Learning)
+# =====================================================
+training_scenarios:
+  # Scenario 1: Single City (Baseline)
+  - name: "delhi_standalone"
+    description: "Train and test on Delhi only (baseline robustness: 1.0)"
+    training_cities: ["delhi"]
+    test_cities: ["delhi"]
+    test_size: 0.2
+    random_state: 42
+    train_test_boundary: "temporal"
+
+  # Scenario 2: Single City
+  - name: "mumbai_standalone"
+    description: "Train and test on Mumbai only"
+    training_cities: ["mumbai"]
+    test_cities: ["mumbai"]
+    test_size: 0.2
+    random_state: 42
+    train_test_boundary: "temporal"
+
+  # Scenario 3: Cross-City Transfer (Delhi → Mumbai)
+  - name: "delhi_to_mumbai"
+    description: "Train on Delhi, test on completely unseen Mumbai (robustness test)"
+    training_cities: ["delhi"]
+    test_cities: ["mumbai"]
+    test_size: 1.0  # Use all Mumbai data as test
+    random_state: 42
+    train_test_boundary: "city_boundary"
+
+  # Scenario 4: Cross-City Transfer (Mumbai → Delhi)
+  - name: "mumbai_to_delhi"
+    description: "Train on Mumbai, test on completely unseen Delhi"
+    training_cities: ["mumbai"]
+    test_cities: ["delhi"]
+    test_size: 1.0
+    random_state: 42
+    train_test_boundary: "city_boundary"
+
+  # Scenario 5: Multi-City (3 Cities → 1 City)
+  - name: "multi_city_to_mumbai"
+    description: "Train on Delhi+Bangalore+Hyderabad, test on isolated Mumbai"
+    training_cities: ["delhi", "bangalore", "hyderabad"]
+    test_cities: ["mumbai"]
+    test_size: 1.0
+    random_state: 42
+    train_test_boundary: "city_boundary"
+
+  # Scenario 6: Multi-City (All but Bangalore)
+  - name: "all_except_bangalore_to_bangalore"
+    description: "Train on 4 cities, test on isolated Bangalore"
+    training_cities: ["delhi", "mumbai", "kolkata", "hyderabad"]
+    test_cities: ["bangalore"]
+    test_size: 1.0
+    random_state: 42
+    train_test_boundary: "city_boundary"
+
+  # Scenario 7: Full Multi-City (Split each city 80/20)
+  - name: "full_multi_city_temporal"
+    description: "Train on all 5 cities (80%), test on all 5 cities (20%) - temporal split"
+    training_cities: ["delhi", "mumbai", "bangalore", "kolkata", "hyderabad"]
+    test_cities: ["delhi", "mumbai", "bangalore", "kolkata", "hyderabad"]
+    test_size: 0.2
+    random_state: 42
+    train_test_boundary: "temporal"
+
+# =====================================================
+# MODEL CONFIGURATION
+# =====================================================
+models:
+  algorithms:
+    - name: "linear_regression"
+      enabled: true
+      hyperparams: {}
+    
+    - name: "random_forest"
+      enabled: true
+      hyperparams:
+        n_estimators: 100
+        max_depth: 15
+        random_state: 42
+        n_jobs: -1
+
+    - name: "xgboost"
+      enabled: true
+      hyperparams:
+        n_estimators: 200
+        max_depth: 7
+        learning_rate: 0.1
+        random_state: 42
+
+    - name: "lightgbm"
+      enabled: true
+      hyperparams:
+        n_estimators: 200
+        max_depth: 7
+        learning_rate: 0.1
+        random_state: 42
+        num_leaves: 31
+
+    - name: "neural_network"
+      enabled: true
+      hyperparams:
+        hidden_layers: [64, 32]
+        dropout_rate: 0.3
+        epochs: 50
+        batch_size: 32
+        validation_split: 0.2
+        random_state: 42
+
+  # Feature engineering
+  features:
+    selected_features:
+      - "temperature"
+      - "humidity"
+      - "wind_speed"
+      - "altitude"
+      - "population_density"
+    
+    # Polynomial features (degree 2)
+    add_polynomial_features: false
+    polynomial_degree: 2
+
+# =====================================================
+# EVALUATION CONFIGURATION
+# =====================================================
+evaluation:
+  # Metrics to compute
+  metrics:
+    - "rmse"
+    - "mae"
+    - "r2"
+    - "robustness_score"
+  
+  # Robustness score calculation
+  robustness_score_config:
+    # Overfitting ratio weight (0.0-1.0)
+    overfitting_weight: 0.4
+    # Transfer performance weight
+    transfer_weight: 0.6
+    # Penalize if transfer RMSE > train RMSE by this ratio
+    acceptable_degradation: 1.5
+
+# =====================================================
+# ARTIFACTS & LOGGING
+# =====================================================
+artifacts:
+  base_dir: "backend/artifacts/"
+  models_dir: "backend/artifacts/models/"
+  metrics_dir: "backend/artifacts/metrics/"
+  
+  # Model serialization format
+  model_format: "joblib"  # or "pickle"
+  
+  # Save model feature importance
+  save_feature_importance: true
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  log_file: "backend/logs/pipeline.log"
+
+# =====================================================
+# REPRODUCIBILITY
+# =====================================================
+random_state: 42
